@@ -10,18 +10,20 @@ public class Conta {
 
 
     public String getNomeCliente() {
-        return nomeCliente;
+        return this.nomeCliente;
     }
     
     public int getSaldo() {
-        return saldo;
+        return this.saldo;
     }
 
     public int getNumeroAgencia() {
-        return numeroAgencia;
+        return this.numeroAgencia;
     }
     
     public int getNumeroConta() {
-        return numeroConta;
+        return this.numeroConta;
     }
+
+
 }

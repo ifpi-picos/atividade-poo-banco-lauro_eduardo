@@ -10,7 +10,12 @@ public class Cliente {
     private String endereco;
     private List<Conta> contas;
 
-    
+    public Cliente(String nome, int cpf, Date data, String endereco){
+        this.nome = nome;
+        this.CPF = cpf;
+        this.dataNascimento = data;
+        this.endereco = endereco;
+    }
 
     public String getNome() {
         return nome;
