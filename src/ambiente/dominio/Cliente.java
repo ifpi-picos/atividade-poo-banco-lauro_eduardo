@@ -7,14 +7,14 @@ public class Cliente {
     private String nome;
     private int CPF;
     private Date dataNascimento;
-    private String endereco;
+    private Endereco endereco;
     private List<Conta> contas;
 
-    public Cliente(String nome, int cpf, Date data, String endereco){
+    public Cliente(String nome, int cpf, Endereco Endereco/*, Date data */){
         this.nome = nome;
         this.CPF = cpf;
-        this.dataNascimento = data;
-        this.endereco = endereco;
+        /*this.dataNascimento = data;*/
+        this.endereco = Endereco;
     }
 
     public String getNome() {
@@ -33,7 +33,7 @@ public class Cliente {
         return dataNascimento;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 }
