@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class Cliente {
+    public final int CPF;
     private String nome;
-    private int CPF;
     private Date dataNascimento;
     private Endereco endereco;
     private List<Conta> contas;
