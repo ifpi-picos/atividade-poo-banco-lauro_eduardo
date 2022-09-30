@@ -55,10 +55,10 @@ public class App {
 
         long convertor_num = Long.parseLong(numero_p);
         long convertor_cep = Long.parseLong(Cep_p);
-        long convertor_cpf = Long.parseLong(CPF_p);
+        // long convertor_cpf = Long.parseLong(CPF_p);
 
         Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
-        Cliente cliente_1 = new Cliente(Nome_p,convertor_cpf,endereco);
+        Cliente cliente_1 = new Cliente(Nome_p,CPF_p,endereco);
 
     }
     public static void entra(){
