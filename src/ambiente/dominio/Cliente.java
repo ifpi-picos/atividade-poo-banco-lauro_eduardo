@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.List;
 
 public class Cliente {
-    public final int CPF;
+    public final long CPF;
     private String nome;
     private Date dataNascimento;
     private Endereco endereco;
     private List<Conta> contas;
 
-    public Cliente(String nome, int cpf, Endereco Endereco/*, Date data */){
+    public Cliente(String nome, long cpf, Endereco Endereco/*, Date data */){
         this.nome = nome;
         this.CPF = cpf;
         /*this.dataNascimento = data;*/
@@ -21,7 +21,7 @@ public class Cliente {
         return nome;
     }
 
-    public int getCPF() {
+    public long getCPF() {
         return CPF;
     }
 

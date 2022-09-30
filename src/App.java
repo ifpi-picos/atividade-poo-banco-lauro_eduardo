@@ -30,7 +30,7 @@ public class App {
 
     }
 
-    public static  int verMenu(List<Integer> menu){
+    public static int verMenu(List<Integer> menu){
         Object[] menusArray = menu.toArray();
         int opcaoSelecionad = JOptionPane.showOptionDialog(null,
                 "1. Cadastrar \n2. Entrar \n3. Sair",
@@ -53,9 +53,9 @@ public class App {
         String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
         String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
 
-        int convertor_num = Integer.parseInt(numero_p);
-        int convertor_cep = Integer.parseInt(Cep_p);
-        int convertor_cpf = Integer.parseInt(CPF_p);
+        long convertor_num = Long.parseLong(numero_p);
+        long convertor_cep = Long.parseLong(Cep_p);
+        long convertor_cpf = Long.parseLong(CPF_p);
 
         Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
         Cliente cliente_1 = new Cliente(Nome_p,convertor_cpf,endereco);

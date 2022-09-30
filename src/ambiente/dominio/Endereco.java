@@ -2,12 +2,12 @@ package ambiente.dominio;
 
 public class Endereco {
     private String Logradouro;
-    private int numero;
+    private long numero;
     private String bairro;
     private String cidade;
-    private int CEP;
+    private long CEP;
 
-    public Endereco(String logra, int nume, String bairro, String cida,int cep){
+    public Endereco(String logra, long nume, String bairro, String cida,long cep){
         this.Logradouro = logra;
         this.numero = nume;
         this.cidade = cida;
