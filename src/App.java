@@ -16,21 +16,19 @@ public class App {
         menu.add(3);
 
         int menuSelecionado = 1;
-        while(menu.get(menuSelecionado) != 3){
+        while (menu.get(menuSelecionado) != 3) {
             menuSelecionado = verMenu(menu);
-            if(menu.get(menuSelecionado) == 1){
+            if (menu.get(menuSelecionado) == 1) {
                 cadastrar();
-            }
-            else if(menu.get(menuSelecionado)== 2){
+            } else if (menu.get(menuSelecionado) == 2) {
                 entra();
             }
 
         }
 
-
     }
 
-    public static int verMenu(List<Integer> menu){
+    public static int verMenu(List<Integer> menu) {
         Object[] menusArray = menu.toArray();
         int opcaoSelecionad = JOptionPane.showOptionDialog(null,
                 "1. Cadastrar \n2. Entrar \n3. Sair",
@@ -39,14 +37,14 @@ public class App {
                 menusArray, null);
         return opcaoSelecionad;
     }
-    
-    public static void cadastrar(){
-        /*Informações da pessoa */
+
+    public static void cadastrar() {
+        /* Informações da pessoa */
         String Nome_p = JOptionPane.showInputDialog("Seu nome");
         String CPF_p = JOptionPane.showInputDialog("Seu CPF");
         Date data_p = null;
-        
-        /*Endereço */
+
+        /* Endereço */
         String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
         String numero_p = JOptionPane.showInputDialog("Escreva o número da sua casa");
         String Cep_p = JOptionPane.showInputDialog("Escreva seu CEP");
@@ -58,35 +56,66 @@ public class App {
         // long convertor_cpf = Long.parseLong(CPF_p);
 
         Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
-        Cliente cliente_1 = new Cliente(Nome_p,CPF_p,endereco);
+        Cliente cliente_1 = new Cliente(Nome_p, CPF_p, endereco);
 
     }
-    public static void entra(){
+
+    public static void entra() {
         String agencia = JOptionPane.showInputDialog("Qual o número da sua agência?");
         String senha = JOptionPane.showInputDialog("Escreva a sua senha");
+
+        if (agencia == "Ruan" && senha == "01020304") {
+
+            List<Integer> menu_interativo = new ArrayList<>();
+            menu_interativo.add(1);
+            menu_interativo.add(2);
+            menu_interativo.add(3);
+            menu_interativo.add(4);
+            menu_interativo.add(5);
+
+            int menuSelecionado = 1;
+            while (menu_interativo.get(menuSelecionado) != 5) {
+                menuSelecionado = verMenu_principal(menu_interativo);
+                if (menu_interativo.get(menuSelecionado) == 1) {
+                    verSaldo();
+                } else if (menu_interativo.get(menuSelecionado) == 2) {
+                    depositar();
+                } else if (menu_interativo.get(menuSelecionado) == 2) {
+                    sacar();
+                } else if (menu_interativo.get(menuSelecionado) == 2) {
+                    trasferir();
+                }
+
+            }
+
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    /*public static void verSaldo(){
+
+    public static int verMenu_principal(List<Integer> menu_interativo) {
+        Object[] menusArray = menu_interativo.toArray();
+        int opcaoSelecionad = JOptionPane.showOptionDialog(null,
+                "1. Ver saldo \n2. Depositar \n3. Sacar \n4. Transferir \n5. Sair",
+                "Menu",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                menusArray, null);
+        return opcaoSelecionad;
 
     }
 
-    public static void depositar(){
+    public static void verSaldo() {
 
     }
 
-    public static void sacar(){
+    public static void depositar() {
 
     }
 
-    public static void trasferir(){
+    public static void sacar() {
 
     }
-    */
+
+    public static void trasferir() {
+
+    }
+
 }
