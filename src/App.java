@@ -64,7 +64,8 @@ public class App {
         String agencia = JOptionPane.showInputDialog("Qual o número da sua agência?");
         String senha = JOptionPane.showInputDialog("Escreva a sua senha");
 
-        if (agencia == "Ruan" && senha == "01020304") {
+
+        if(agencia.equals("Ruan") && senha.equals("abc")) {
 
             List<Integer> menu_interativo = new ArrayList<>();
             menu_interativo.add(1);
