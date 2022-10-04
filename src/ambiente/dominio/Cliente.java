@@ -50,4 +50,8 @@ public class Cliente {
     public String getSenha() {
         return senha;
     }
+
+    public void addConta(Conta conta){
+        this.contas.add(conta);
+    }
 }

@@ -58,9 +58,9 @@ public class App {
         /* Endereço */
         String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
         String numero_p = JOptionPane.showInputDialog("Escreva o número da sua casa");
-        String Cep_p = JOptionPane.showInputDialog("Escreva seu CEP");
-        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
         String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
+        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
+        String Cep_p = JOptionPane.showInputDialog("Escreva seu CEP");
 
         long convertor_num = Long.parseLong(numero_p);
         long convertor_cep = Long.parseLong(Cep_p);
@@ -145,6 +145,15 @@ public class App {
                                 }                               
                             }
                         }
+                    }else if(opcSelecionada == 1){
+                        Random geradorConta = new Random();
+
+                        int numConta = geradorConta.nextInt(51);
+
+                        Conta c = new Conta(numConta);
+
+                        cliente.addConta(c);
+                        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
                     }
                 }
             }
