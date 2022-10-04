@@ -99,10 +99,6 @@ public class App {
                 //System.out.println("Nenhum cliente cadastrado!");
             }
 
-            
-
-            double saldo = 0;
-
             List<Integer> menu_interativo = new ArrayList<>();
             menu_interativo.add(1);
             menu_interativo.add(2);
