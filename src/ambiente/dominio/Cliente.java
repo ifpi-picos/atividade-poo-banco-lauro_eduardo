@@ -4,19 +4,21 @@ import java.util.Date;
 import java.util.List;
 
 public class Cliente {
-    public final String CPF;
+    private final String CPF;
     private String nome;
     private Date dataNascimento;
     private Endereco endereco;
     private Conta conta;
     private List<Conta> contas;
+    private String senha;
 
-    public Cliente(String nome, String cpf, Endereco Endereco/*, Date data */, Conta conta){
+    public Cliente(String nome, String cpf, Endereco Endereco/*, Date data */, Conta conta, String senha){
         this.nome = nome;
         this.CPF = cpf;
         /*this.dataNascimento = data;*/
         this.endereco = Endereco;
         this.conta = conta;
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -41,5 +43,9 @@ public class Cliente {
 
     public Conta getConta() {
         return conta;
+    }
+
+    public String getSenha() {
+        return senha;
     }
 }
