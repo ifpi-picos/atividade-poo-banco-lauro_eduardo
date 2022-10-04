@@ -14,4 +14,24 @@ public class Endereco {
         this.bairro = bairro;
         this.CEP = cep;
     }
+
+    public String getLogra(){
+        return Logradouro;
+    }
+
+    public long getnume(){
+        return numero;
+    }
+
+    public String getbairro(){
+        return bairro;
+    }
+
+    public String getcidade(){
+        return cidade;
+    }
+
+    public long getCEP(){
+        return CEP;
+    }
 }

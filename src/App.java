@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 public class App {
 
@@ -74,6 +75,10 @@ public class App {
     public static void entra() {
         String agencia = JOptionPane.showInputDialog("Qual o número da sua agência?");
         String senha = JOptionPane.showInputDialog("Escreva a sua senha");
+        int del = JOptionPane.showConfirmDialog(null, agencia, senha, 0);
+        /*UIManager.put("OptionPane.cancelButtonText", "Cancelar"); 
+        UIManager.put("OptionPane.noButtonText", "Não"); 
+        UIManager.put("OptionPane.yesButtonText", "Sim");*/
 
         
 
@@ -104,18 +109,21 @@ public class App {
             menu_interativo.add(3);
             menu_interativo.add(4);
             menu_interativo.add(5);
+            menu_interativo.add(6);
 
             int menuSelecionado = 1;
-            while (menu_interativo.get(menuSelecionado) != 5) {
+            while (menu_interativo.get(menuSelecionado) != 6) {
                 menuSelecionado = verMenu_principal(menu_interativo);
                 if (menu_interativo.get(menuSelecionado) == 1) {
                     verSaldo();
                 } else if (menu_interativo.get(menuSelecionado) == 2) {
                     depositar();
-                } else if (menu_interativo.get(menuSelecionado) == 2) {
+                } else if (menu_interativo.get(menuSelecionado) == 3) {
                     sacar();
-                } else if (menu_interativo.get(menuSelecionado) == 2) {
+                } else if (menu_interativo.get(menuSelecionado) == 4) {
                     trasferir();
+                } else if(menu_interativo.get(menuSelecionado) == 5){
+                    verPerfil();
                 }
 
             }
@@ -126,7 +134,7 @@ public class App {
     public static int verMenu_principal(List<Integer> menu_interativo) {
         Object[] menusArray = menu_interativo.toArray();
         int opcaoSelecionad = JOptionPane.showOptionDialog(null,
-                "1. Ver saldo \n2. Depositar \n3. Sacar \n4. Transferir \n5. Sair",
+                "1. Ver saldo \n2. Depositar \n3. Sacar \n4. Transferir \n5. Ver perfil \n6. Sair",
                 "Menu",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                 menusArray, null);
@@ -167,6 +175,9 @@ public class App {
 
     public static void trasferir() {
         JOptionPane.showMessageDialog(null, "Transferir em desenvolvimento!", null, 0);
+    }
+    public static void verPerfil(){
+    
     }
 
 }
