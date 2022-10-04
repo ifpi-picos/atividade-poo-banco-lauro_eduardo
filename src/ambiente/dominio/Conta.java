@@ -1,19 +1,22 @@
 package ambiente.dominio;
 
 public class Conta {
-    private int numeroAgencia;
+    private int numeroAgencia = 1;
     private int numeroConta;
-    private int saldo;
+    private double saldo = 0;
     private String nomeCliente;
-    private Cliente cliente;
+    // private Cliente cliente;
 
-
+  
+    public Conta(int numeroConta){
+        this.numeroConta = numeroConta;
+    }
 
     public String getNomeCliente() {
         return this.nomeCliente;
     }
     
-    public int getSaldo() {
+    public double getSaldo() {
         return this.saldo;
     }
 
