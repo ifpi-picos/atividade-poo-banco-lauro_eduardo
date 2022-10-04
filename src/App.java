@@ -97,8 +97,27 @@ public class App {
 
                     System.out.println("Número da conta: " + ((Conta) clientes.get(0).getContas().get(0)).getNumeroConta() + "\nSaldo: " + ((Conta) clientes.get(0).getContas().get(0)).getSaldo());
 
-                    String numConta = JOptionPane.showInputDialog("Digite o número da conta: ");
+                    List<Integer> opcoes = new ArrayList<>();
 
+                    for(Conta conta : clientes.get(0).getContas()){
+                        opcoes.add(conta.getNumeroConta());
+                    }
+
+                    Object[] opcoesConta = opcoes.toArray();
+                    int contaSelecionada = JOptionPane.showOptionDialog(null, "Selecione a conta", "Contas", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoesConta, null);
+
+                    int num_Conta = opcoes.get(contaSelecionada);
+
+                    System.out.println(num_Conta);
+
+                    for(Conta conta : clientes.get(0).getContas()){
+                        if(conta.getNumeroConta() == num_Conta){
+                            
+                        }
+                    }
+
+
+                    String numConta = JOptionPane.showInputDialog("Digite o número da conta: ");
                     Integer autConta = Integer.parseInt(numConta);
 
                     if(autConta == clientes.get(0).getConta().getNumeroConta()){
@@ -134,6 +153,8 @@ public class App {
         }else{
             JOptionPane.showMessageDialog(null, "Nenhum cliente cadastrado!");
         }
+    
+    }
                 
         // int del = JOptionPane.showConfirmDialog(null, agencia, senha, 0);
         /*UIManager.put("OptionPane.cancelButtonText", "Cancelar"); 
@@ -149,7 +170,7 @@ public class App {
 
 
         //System.out.println("Nenhum cliente cadastrado!");
-    }
+    
 
                 
 

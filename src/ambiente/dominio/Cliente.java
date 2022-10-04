@@ -31,7 +31,7 @@ public class Cliente {
         return CPF;
     }
 
-    public List getContas() {
+    public List<Conta> getContas() {
         return contas;
     }
 
