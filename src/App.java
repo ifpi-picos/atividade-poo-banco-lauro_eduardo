@@ -133,13 +133,13 @@ public class App {
                                         // Passando o CPF e o número da conta do cliente
                                         verSaldo(userCPF, num_Conta);
                                     } else if (menu_interativo.get(menuSelecionado) == 2) {
-                                        depositar();
+                                        depositar(userCPF, num_Conta);
                                     } else if (menu_interativo.get(menuSelecionado) == 3) {
-                                        sacar();
+                                        sacar(userCPF, num_Conta);
                                     } else if (menu_interativo.get(menuSelecionado) == 4) {
                                         trasferir();
                                     } else if(menu_interativo.get(menuSelecionado) == 5){
-                                        verPerfil();
+                                        verPerfil(userCPF, num_Conta);
                                     }
 
                                 }                               
@@ -159,9 +159,6 @@ public class App {
         /*UIManager.put("OptionPane.cancelButtonText", "Cancelar"); 
         UIManager.put("OptionPane.noButtonText", "Não"); 
         UIManager.put("OptionPane.yesButtonText", "Sim");*/
-    
-
-                
 
     public static int verMenu_principal(List<Integer> menu_interativo) {
         Object[] menusArray = menu_interativo.toArray();
@@ -191,23 +188,68 @@ public class App {
         
     }
 
-    public static void depositar() {
+    public static void depositar(String CPF, int numConta) {
         /* JOptionPane.showMessageDialog(null, "Depositar em desenvolvimento!", null, 0); */
-        String deposito = JOptionPane.showInputDialog("Quanto deseja depositar?");
+        String deposito = JOptionPane.showInputDialog(null, "Qual valor deseja depositar?");
 
-        double depositoFloat = Double.parseDouble(deposito);
+        Double valorDep = Double.parseDouble(deposito);
+
+        for(Cliente cliente : clientes){
+            // Autenticando o cliente que será acessado
+            if(CPF.equals(cliente.getCPF())){
+
+                for(Conta conta : cliente.getContas()){
+                    //Autenticando a conta que será acessada
+                    if(numConta == conta.getNumeroConta()){
+                        conta.setSaldo(conta.getSaldo() + valorDep);
+                        JOptionPane.showMessageDialog(null, "Valor de " + valorDep + " depositado com sucesso!");
+                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                    }
+                }
+            }
+        }
 
     }
 
-    public static void sacar() {
-        JOptionPane.showMessageDialog(null, "Sacar em desenvolvimento!", null, 0);
+    public static void sacar(String CPF, int numConta) {
+        String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
+
+        Double valorSaque = Double.parseDouble(saque);
+
+        for(Cliente cliente : clientes){
+            // Autenticando o cliente que será acessado
+            if(CPF.equals(cliente.getCPF())){
+
+                for(Conta conta : cliente.getContas()){
+                    //Autenticando a conta que será acessada
+                    if(numConta == conta.getNumeroConta()){
+                        conta.setSaldo(conta.getSaldo() - valorSaque);
+                        JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
+                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                    }
+                }
+            }
+        }
     }
 
     public static void trasferir() {
         JOptionPane.showMessageDialog(null, "Transferir em desenvolvimento!", null, 0);
     }
-    public static void verPerfil(){
     
+    public static void verPerfil(String CPF, int numConta){
+        for(Cliente cliente : clientes){
+            // Autenticando o cliente que será acessado
+            if(CPF.equals(cliente.getCPF())){
+
+                for(Conta conta : cliente.getContas()){
+                    //Autenticando a conta que será acessada
+                    if(numConta == conta.getNumeroConta()){
+                        JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nRua: " + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume() + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: " + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP());
+                    }
+                }
+            }
+        }
     }
+
 
 }

@@ -19,15 +19,15 @@ public class Endereco {
         return Logradouro;
     }
 
-    public long getnume(){
+    public long getNume(){
         return numero;
     }
 
-    public String getbairro(){
+    public String getBairro(){
         return bairro;
     }
 
-    public String getcidade(){
+    public String getCidade(){
         return cidade;
     }
 

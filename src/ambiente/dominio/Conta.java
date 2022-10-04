@@ -28,5 +28,9 @@ public class Conta {
         return this.numeroConta;
     }
 
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
 
 }
