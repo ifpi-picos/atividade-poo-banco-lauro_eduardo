@@ -83,7 +83,7 @@ public class App {
         
 
 
-        if(agencia.equals("Ruan") && senha.equals("abc")) {
+        if(agencia.equals("Ruan") && senha.equals("0102")) {
 
             if(clientes.size() > 0){
                 int opcaoSelecionad = JOptionPane.showOptionDialog(null,
