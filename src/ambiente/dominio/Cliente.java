@@ -2,6 +2,7 @@ package ambiente.dominio;
 
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;;
 
 public class Cliente {
     private final String CPF;
@@ -9,7 +10,7 @@ public class Cliente {
     private Date dataNascimento;
     private Endereco endereco;
     private Conta conta;
-    private List<Conta> contas;
+    private List<Conta> contas = new ArrayList<>();
     private String senha;
 
     public Cliente(String nome, String cpf, Endereco Endereco/*, Date data */, Conta conta, String senha){
@@ -19,6 +20,7 @@ public class Cliente {
         this.endereco = Endereco;
         this.conta = conta;
         this.senha = senha;
+        this.contas.add(conta);
     }
 
     public String getNome() {

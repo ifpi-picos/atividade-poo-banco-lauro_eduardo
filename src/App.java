@@ -94,6 +94,9 @@ public class App {
                 int opcSelecionada = JOptionPane.showOptionDialog(null, "1. Entrar em conta existente \n2. Criar nova conta", "Conta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
 
                 if(opcSelecionada == 0){
+
+                    System.out.println("Número da conta: " + ((Conta) clientes.get(0).getContas().get(0)).getNumeroConta() + "\nSaldo: " + ((Conta) clientes.get(0).getContas().get(0)).getSaldo());
+
                     String numConta = JOptionPane.showInputDialog("Digite o número da conta: ");
 
                     Integer autConta = Integer.parseInt(numConta);
