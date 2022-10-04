@@ -137,7 +137,7 @@ public class App {
                                     } else if (menu_interativo.get(menuSelecionado) == 3) {
                                         sacar(userCPF, num_Conta);
                                     } else if (menu_interativo.get(menuSelecionado) == 4) {
-                                        trasferir();
+                                        trasferir(userCPF, num_Conta);
                                     } else if(menu_interativo.get(menuSelecionado) == 5){
                                         verPerfil(userCPF, num_Conta);
                                     }
@@ -232,10 +232,50 @@ public class App {
         }
     }
 
-    public static void trasferir() {
-        JOptionPane.showMessageDialog(null, "Transferir em desenvolvimento!", null, 0);
+    public static void trasferir(String CPF, int numConta) {
+        String transferencia = JOptionPane.showInputDialog(null, "Qual valor deseja transferir?");
+        String pesDestino = JOptionPane.showInputDialog(null, "Qual o CPF do destinatário?");
+        String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
+
+        Double valorTransf = Double.parseDouble(transferencia);
+        Integer numConDestino = Integer.parseInt(numDestino);
+
+        for(Cliente cliente : clientes){
+            // Autenticando o cliente que será acessado
+            if(CPF.equals(cliente.getCPF())){
+
+                for(Conta conta : cliente.getContas()){
+                    //Autenticando a conta que será acessada
+                    if(numConta == conta.getNumeroConta()){
+
+                        conta.setSaldo(conta.getSaldo() - valorTransf);
+                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+                        break;
+                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                    }
+                }
+                break;
+            }
+        }
+        for(Cliente cliente : clientes){
+            // Autenticando o cliente que será acessado
+            if(pesDestino.equals(cliente.getCPF())){
+
+                for(Conta conta : cliente.getContas()){
+                    //Autenticando a conta que será acessada
+                    if(numConDestino == conta.getNumeroConta()){
+
+                        conta.setSaldo(conta.getSaldo() + valorTransf);
+                        /* JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!"); */
+                        break;
+                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                    }
+                }
+                break;
+            }
+        }
     }
-    
+
     public static void verPerfil(String CPF, int numConta){
         for(Cliente cliente : clientes){
             // Autenticando o cliente que será acessado
