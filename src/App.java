@@ -87,7 +87,7 @@ public class App {
                 // Autenticando cliente
                 if(userCPF.equals(cliente.getCPF()) && userSenha.equals(cliente.getSenha())){
 
-                    JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nNúmero de contas: " + cliente.getContas().size());
+                    JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nQuantidade de contas: " + cliente.getContas().size());
 
                     // Criando menu pós-login
                     List<Integer> menu = new ArrayList<>();
@@ -232,9 +232,15 @@ public class App {
                 for(Conta conta : cliente.getContas()){
                     //Autenticando a conta que será acessada
                     if(numConta == conta.getNumeroConta()){
-                        conta.setSaldo(conta.getSaldo() - valorSaque);
+
+                        Double analise = conta.getSaldo() - valorSaque;
+                        if(analise >= 0){
+                            conta.setSaldo(conta.getSaldo() - valorSaque);
                         JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
                         //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Você está tentando sacar um valor que não possui");
+                        }
                     }
                 }
             }
@@ -256,32 +262,36 @@ public class App {
                 for(Conta conta : cliente.getContas()){
                     //Autenticando a conta que será acessada
                     if(numConta == conta.getNumeroConta()){
+                        Double verificar_valor = conta.getSaldo() - valorTransf;
+                        if(verificar_valor >= 0){ //Vai verificar se tem esse valor na conta.
+                            for(Cliente clientes: clientes){
 
-                       for(Cliente clientes: clientes){
+                                if(pesDestino.equals(clientes.getCPF())){
 
-                            if(pesDestino.equals(clientes.getCPF())){
+                                    for(Conta contas : clientes.getContas()){
 
-                                for(Conta contas : clientes.getContas()){
+                                        if(numConDestino == contas.getNumeroConta()){
+                                            conta.setSaldo(conta.getSaldo() - valorTransf);
+                                            JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+                                            break;
+                                            //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
 
-                                    if(numConDestino == contas.getNumeroConta()){
-                                        conta.setSaldo(conta.getSaldo() - valorTransf);
-                                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-                                        break;
-                                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-
-                                    }else{
+                                        }/*else{
                                         JOptionPane.showMessageDialog(null,"Esse número da conta não está voltado para esse CPF");
+                                    }*/
                                     }
-                                }
-                            }else{
+                                }/*else{
                                 JOptionPane.showMessageDialog(null,"Esse CPF não está cadastrado no banco!");
-                       }
+                       }*/
+                            }
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Você está tentando transferir um valor que não possui");
                     }
+                    }   
                 }
-            }
             break;
+            }
         }
-    }
         for(Cliente cliente : clientes){
             // Autenticando o cliente que será acessado
             if(pesDestino.equals(cliente.getCPF())){
