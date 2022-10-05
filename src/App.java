@@ -257,15 +257,31 @@ public class App {
                     //Autenticando a conta que será acessada
                     if(numConta == conta.getNumeroConta()){
 
-                        conta.setSaldo(conta.getSaldo() - valorTransf);
-                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-                        break;
-                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                       for(Cliente clientes: clientes){
+
+                            if(pesDestino.equals(clientes.getCPF())){
+
+                                for(Conta contas : clientes.getContas()){
+
+                                    if(numConDestino == contas.getNumeroConta()){
+                                        conta.setSaldo(conta.getSaldo() - valorTransf);
+                                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+                                        break;
+                                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Esse número da conta não está voltado para esse CPF");
+                                    }
+                                }
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Esse CPF não está cadastrado no banco!");
+                       }
                     }
                 }
-                break;
             }
+            break;
         }
+    }
         for(Cliente cliente : clientes){
             // Autenticando o cliente que será acessado
             if(pesDestino.equals(cliente.getCPF())){
