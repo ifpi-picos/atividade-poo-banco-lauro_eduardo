@@ -321,9 +321,9 @@ public class App {
                             break;
                         }   
                         //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-                    }
                     }else{
                         JOptionPane.showMessageDialog(null, "Não é possível realizar uma transferência com valor superior ao saldo!");
+                    }
                     }
                 }
                 
