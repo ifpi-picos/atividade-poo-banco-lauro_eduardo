@@ -9,6 +9,13 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "App",
+            "projectName": "atividade-poo-banco-lauro_eduardo_a3dd0ba7"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "App",
             "projectName": "atividade-poo-banco-lauro_eduardo_3e1175d3"
         }
     ]
