@@ -17,4 +17,7 @@
 - O CPF do cliente não pode ser alterado;
 
 #### Resolver
-- Saque e Transferência não podem ser maiores que saldo
+- Ajustar as datas
+- Não permitir cadastro de cliente com CPF já existente
+- Não permitir criação de conta com número de conta já existente
+- Idade mínima para cadastro

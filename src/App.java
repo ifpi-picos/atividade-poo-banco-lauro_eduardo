@@ -50,17 +50,17 @@ public class App {
         int numConta = geradorConta.nextInt(51);
 
         /* Informações da pessoa */
-        String Nome_p = JOptionPane.showInputDialog("Seu nome");
-        String CPF_p = JOptionPane.showInputDialog("Seu CPF");
-        String senha = JOptionPane.showInputDialog("Crie uma senha");
+        String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
+        String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
+        String senha = JOptionPane.showInputDialog("Crie uma senha: ");
         Date data_p = null;
 
         /* Endereço */
         String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
-        String numero_p = JOptionPane.showInputDialog("Escreva o número da sua casa");
+        String numero_p = JOptionPane.showInputDialog("Digite o número da sua casa: ");
         String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
         String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
-        String Cep_p = JOptionPane.showInputDialog("Escreva seu CEP");
+        String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
 
         long convertor_num = Long.parseLong(numero_p);
         long convertor_cep = Long.parseLong(Cep_p);
@@ -309,7 +309,7 @@ public class App {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "Não é possível realizar uma transferência com valor superior ao saldo!");
+                                    "Não é possível realizar uma transferência com valor superior ao seu saldo!");
                         }
                     }
                 }
