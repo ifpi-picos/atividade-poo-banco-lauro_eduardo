@@ -77,17 +77,18 @@ public class App {
 
     public static void entra() {
 
-        if(clientes.size() > 0){
+        if (clientes.size() > 0) {
 
             String userCPF = JOptionPane.showInputDialog("Digite seu CPF: ");
             String userSenha = JOptionPane.showInputDialog("Digite sua senha: ");
 
             // Percorrendo clientes
-            for(Cliente cliente : clientes){
+            for (Cliente cliente : clientes) {
                 // Autenticando cliente
-                if(userCPF.equals(cliente.getCPF()) && userSenha.equals(cliente.getSenha())){
+                if (userCPF.equals(cliente.getCPF()) && userSenha.equals(cliente.getSenha())) {
 
-                    JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nQuantidade de contas: " + cliente.getContas().size());
+                    JOptionPane.showMessageDialog(null,
+                            "Nome: " + cliente.getNome() + "\nQuantidade de contas: " + cliente.getContas().size());
 
                     // Criando menu pós-login
                     List<Integer> menu = new ArrayList<>();
@@ -95,27 +96,30 @@ public class App {
                     menu.add(2);
 
                     Object[] menuEntrar = menu.toArray();
-                    int opcSelecionada = JOptionPane.showOptionDialog(null, "1. Entrar em conta existente \n2. Criar nova conta", "Conta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
+                    int opcSelecionada = JOptionPane.showOptionDialog(null,
+                            "1. Entrar em conta existente \n2. Criar nova conta", "Conta", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
 
-                    if(opcSelecionada == 0){
-    
+                    if (opcSelecionada == 0) {
+
                         List<Integer> opcoes = new ArrayList<>();
-                        
-                        for(Conta conta : cliente.getContas()){
+
+                        for (Conta conta : cliente.getContas()) {
                             opcoes.add(conta.getNumeroConta());
                         }
-    
+
                         Object[] opcoesConta = opcoes.toArray();
-                        int contaSelecionada = JOptionPane.showOptionDialog(null, "Selecione a conta: ", "Contas", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoesConta, null);
-    
+                        int contaSelecionada = JOptionPane.showOptionDialog(null, "Selecione a conta: ", "Contas",
+                                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, opcoesConta, null);
+
                         int num_Conta = opcoes.get(contaSelecionada);
-    
+
                         // System.out.println(num_Conta);
 
                         // Percorrendo contas do cliente
-                        for(Conta conta : cliente.getContas()){
+                        for (Conta conta : cliente.getContas()) {
                             // Autenticando conta
-                            if(num_Conta == conta.getNumeroConta()){
+                            if (num_Conta == conta.getNumeroConta()) {
                                 // System.out.println("Hello");
 
                                 List<Integer> menu_interativo = new ArrayList<>();
@@ -138,14 +142,14 @@ public class App {
                                         sacar(userCPF, num_Conta);
                                     } else if (menu_interativo.get(menuSelecionado) == 4) {
                                         trasferir(userCPF, num_Conta);
-                                    } else if(menu_interativo.get(menuSelecionado) == 5){
+                                    } else if (menu_interativo.get(menuSelecionado) == 5) {
                                         verPerfil(userCPF, num_Conta);
                                     }
 
-                                }                               
+                                }
                             }
                         }
-                    }else if(opcSelecionada == 1){
+                    } else if (opcSelecionada == 1) {
                         Random geradorConta = new Random();
 
                         int numConta = geradorConta.nextInt(51);
@@ -158,16 +162,11 @@ public class App {
                 }
             }
 
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "Nenhum cliente cadastrado!");
         }
-    
+
     }
-                
-        // int del = JOptionPane.showConfirmDialog(null, agencia, senha, 0);
-        /*UIManager.put("OptionPane.cancelButtonText", "Cancelar"); 
-        UIManager.put("OptionPane.noButtonText", "Não"); 
-        UIManager.put("OptionPane.yesButtonText", "Sim");*/
 
     public static int verMenu_principal(List<Integer> menu_interativo) {
         Object[] menusArray = menu_interativo.toArray();
@@ -181,38 +180,38 @@ public class App {
     }
 
     public static void verSaldo(String CPF, int numConta) {
-        
-        for(Cliente cliente : clientes){
-            // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
 
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
-                        JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+        for (Cliente cliente : clientes) {
+            // Autenticando o cliente que será acessado
+            if (CPF.equals(cliente.getCPF())) {
+
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
                     }
                 }
             }
         }
-        
+
     }
 
     public static void depositar(String CPF, int numConta) {
-        /* JOptionPane.showMessageDialog(null, "Depositar em desenvolvimento!", null, 0); */
+ 
         String deposito = JOptionPane.showInputDialog(null, "Qual valor deseja depositar?");
 
         Double valorDep = Double.parseDouble(deposito);
 
-        for(Cliente cliente : clientes){
+        for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
+            if (CPF.equals(cliente.getCPF())) {
 
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
                         conta.setSaldo(conta.getSaldo() + valorDep);
                         JOptionPane.showMessageDialog(null, "Valor de " + valorDep + " depositado com sucesso!");
-                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
                     }
                 }
             }
@@ -225,21 +224,21 @@ public class App {
 
         Double valorSaque = Double.parseDouble(saque);
 
-        for(Cliente cliente : clientes){
+        for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
+            if (CPF.equals(cliente.getCPF())) {
 
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
 
                         Double analise = conta.getSaldo() - valorSaque;
-                        if(analise >= 0){
+                        if (analise >= 0) {
                             conta.setSaldo(conta.getSaldo() - valorSaque);
-                        JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
-                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Você está tentando sacar um valor acima do seu saldo!");
+                            JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Você está tentando sacar um valor acima do seu saldo!");
                         }
                     }
                 }
@@ -255,158 +254,85 @@ public class App {
         Double valorTransf = Double.parseDouble(transferencia);
         Integer numConDestino = Integer.parseInt(numDestino);
 
-
-            for(Cliente cliente : clientes){
+        for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
+            if (CPF.equals(cliente.getCPF())) {
 
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
 
-                        if(valorTransf <= conta.getSaldo()){
-                            System.out.println("Menor ou Igualh");
+                        if (valorTransf <= conta.getSaldo()) {
 
-                        // conta.setSaldo(conta.getSaldo() + valorTransf);
-                        /* conta.setSaldo(conta.getSaldo() - valorTransf);
-                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!"); */
-                        /* JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!"); */
-
-                        List<String> cliCPF = new ArrayList<>();
-                        for(Cliente c : clientes){
-                            cliCPF.add(c.getCPF());
-                        }
-
-                        if(cliCPF.contains(pesDestino)){
-                            System.out.println("Contains 1");
-
-                        for(Cliente cli : clientes){
-                            // Autenticando o cliente que será acessado
-                            if(pesDestino.equals(cli.getCPF())){
-
-                                List<Integer> cliConta = new ArrayList<>();
-
-                                for(Conta cont : cli.getContas()){
-                                    cliConta.add(cont.getNumeroConta());
-                                }
-
-                                if(cliConta.contains(numConDestino)){
-                                    System.out.println("Contains 2");
-                
-                                    for(Conta cont : cli.getContas()){
-                                        //Autenticando a conta que será acessada
-                                        if(numConDestino == cont.getNumeroConta()){
-
-                                            conta.setSaldo(conta.getSaldo() - valorTransf);
-                                            JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-                    
-                                            cont.setSaldo(cont.getSaldo() + valorTransf);
-
-                                            /* cont.setSaldo(cont.getSaldo() - valorTransf);
-                                            JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!"); */
-                                            break;
-                                            //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-                                        }
-                                    }
-                                }else{
-                                    JOptionPane.showMessageDialog(null, "Conta não existe!");
-                                    break;
-                                }
-                                
+                            List<String> cliCPF = new ArrayList<>();
+                            for (Cliente c : clientes) {
+                                cliCPF.add(c.getCPF());
                             }
-                        }
 
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Cliente não existe!");
-                            break;
-                        }   
-                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Não é possível realizar uma transferência com valor superior ao saldo!");
-                    }
-                    }
-                }
-                
-                
-                
-                
-                
-                // break;
-            }
-        }
+                            if (cliCPF.contains(pesDestino)) {
 
-        
-        
-        
-        
-        
-        
-        /* for(Cliente cliente : clientes){
-            // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
+                                for (Cliente cli : clientes) {
+                                    // Autenticando o cliente que será acessado
+                                    if (pesDestino.equals(cli.getCPF())) {
 
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
-                        Double verificar_valor = conta.getSaldo() - valorTransf;
-                        if(verificar_valor >= 0){ //Vai verificar se tem esse valor na conta.
-                            for(Cliente clientes: clientes){
+                                        List<Integer> cliConta = new ArrayList<>();
 
-                                if(pesDestino.equals(clientes.getCPF())){
-
-                                    for(Conta contas : clientes.getContas()){
-
-                                        if(numConDestino == contas.getNumeroConta()){
-                                            conta.setSaldo(conta.getSaldo() - valorTransf);
-                                            JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-                                            break;
-                                            //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-
+                                        for (Conta cont : cli.getContas()) {
+                                            cliConta.add(cont.getNumeroConta());
                                         }
+
+                                        if (cliConta.contains(numConDestino)) {
+
+                                            for (Conta cont : cli.getContas()) {
+                                                // Autenticando a conta que será acessada
+                                                if (numConDestino == cont.getNumeroConta()) {
+
+                                                    conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                    JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+
+                                                    cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            JOptionPane.showMessageDialog(null, "Conta não existe!");
+                                            break;
+                                        }
+
                                     }
                                 }
+
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Cliente não existe!");
+                                break;
                             }
-                        }else{
-                            JOptionPane.showMessageDialog(null, "Você está tentando transferir um valor acima do seu saldo!");
-                    }
-                    }   
-                }
-            break;
-            }
-        } */
-        /* for(Cliente cliente : clientes){
-            // Autenticando o cliente que será acessado
-            if(pesDestino.equals(cliente.getCPF())){
-
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConDestino == conta.getNumeroConta()){
-
-                        conta.setSaldo(conta.getSaldo() + valorTransf);
-                        // JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-                        break;
-                        //JOptionPane.showMessageDialog(null, "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
-                    }
-                }
-                break;
-            }
-        } */
-    }
-
-    public static void verPerfil(String CPF, int numConta){
-        for(Cliente cliente : clientes){
-            // Autenticando o cliente que será acessado
-            if(CPF.equals(cliente.getCPF())){
-
-                for(Conta conta : cliente.getContas()){
-                    //Autenticando a conta que será acessada
-                    if(numConta == conta.getNumeroConta()){
-                        JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nRua: " + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume() + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: " + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP());
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "Não é possível realizar uma transferência com valor superior ao saldo!");
+                        }
                     }
                 }
             }
         }
     }
 
+    public static void verPerfil(String CPF, int numConta) {
+        for (Cliente cliente : clientes) {
+            // Autenticando o cliente que será acessado
+            if (CPF.equals(cliente.getCPF())) {
+
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
+                        JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nRua: "
+                                + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
+                                + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP());
+                    }
+                }
+            }
+        }
+    }
 
 }
