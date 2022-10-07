@@ -54,6 +54,13 @@ public class App {
         /* Informações da pessoa */
         String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
         String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
+        for (Cliente cliente : clientes) {
+            // Autenticando o cliente que será acessado
+            if (CPF_p.equals(cliente.getCPF())) {
+                JOptionPane.showMessageDialog(null, "Esse CPF já está cadastrado");
+                entra();
+                }
+        }
         
         List<Integer> menu = new ArrayList<>();
                     menu.add(1);
@@ -177,15 +184,30 @@ public class App {
                             }
                         }
                     } else if (opcSelecionada == 1) {
+                        List<Integer> menu_n = new ArrayList<>();
+                        menu.add(1);
+                        menu.add(2);
+    
+                        Object[] menu_novo = menu_n.toArray();
+                        int opcSelecionada_novo = JOptionPane.showOptionDialog(null,
+                                "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
+                                JOptionPane.PLAIN_MESSAGE, null, menu_novo, null);
                         
-                        /*Random geradorConta = new Random();
+                        Random geradorConta = new Random();
 
                         int numConta = geradorConta.nextInt(51);
 
-                        Conta c = new Conta(numConta);
-
-                        cliente.addConta(c);
-                        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);*/
+                        if(opcSelecionada_novo == 0){
+                            String tipo = "corrente";
+                            Conta c = new Conta(numConta, tipo);
+                            cliente.addConta(c);
+                        }else if(opcSelecionada_novo == 1){
+                            String tipo = "poupança";
+                            Conta c = new Conta(numConta,tipo);
+                            cliente.addConta(c);
+                        }
+                        
+                        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
                     }
                 }
             }
