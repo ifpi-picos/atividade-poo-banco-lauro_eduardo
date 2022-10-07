@@ -5,11 +5,13 @@ public class Conta {
     private int numeroConta;
     private double saldo = 0;
     private String nomeCliente;
+    private String Type;
     // private Cliente cliente;
 
   
-    public Conta(int numeroConta){
+    public Conta(int numeroConta, String type){
         this.numeroConta = numeroConta;
+        this.Type = type;
     }
 
     public String getNomeCliente() {
@@ -30,6 +32,9 @@ public class Conta {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+    public String getType(){
+        return this.Type;
     }
 
 
