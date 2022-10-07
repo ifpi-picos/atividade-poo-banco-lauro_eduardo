@@ -28,7 +28,7 @@ public class App {
         while (menu.get(menuSelecionado) != 3) {
             menuSelecionado = verMenu(menu);
             if (menu.get(menuSelecionado) == 1) {
-                novaConta();
+                cadastrar();
             } else if (menu.get(menuSelecionado) == 2) {
                 entra();
             }
@@ -48,11 +48,61 @@ public class App {
     }
 
     public static void cadastrar() throws ParseException {
+        Random geradorConta = new Random();
 
+        int numConta = geradorConta.nextInt(51);
+        /* Informações da pessoa */
+        String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
+        String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
+        
+        List<Integer> menu = new ArrayList<>();
+                    menu.add(1);
+                    menu.add(2);
+
+        Object[] menuEntrar = menu.toArray();
+        int opcSelecionada = JOptionPane.showOptionDialog(null,
+                            "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
+                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
+
+        String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
+        String email_p = JOptionPane.showInputDialog("Digite seu email: ");
+        String telefone_p = JOptionPane.showInputDialog("Digite seu telefone: ");
+        String data_p = JOptionPane.showInputDialog(null, "Digite sua data de nascimento: (dd/mm/yyyy)");
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+        Date dataFormat = formato.parse(data_p);
+
+        /* Endereço */
+        String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
+        String numero_p = JOptionPane.showInputDialog("Digite o número da sua casa: ");
+        String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
+        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
+        String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
+
+        long convertor_num = Long.parseLong(numero_p);
+        long convertor_cep = Long.parseLong(Cep_p);
+        long telefone_conv = Long.parseLong(telefone_p);
+
+        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
+
+        if(opcSelecionada == 0){
+            String tipo = "corrente";
+            Conta c1 = new Conta(numConta, tipo);
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            clientes.add(cliente);
+
+        }else if(opcSelecionada == 1){
+            String tipo = "poupança";
+            Conta c1 = new Conta(numConta, tipo);   
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            clientes.add(cliente);
+        }
+
+        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        
     }
 
-    public static void entra() throws ParseException {
+    public static void entra()  {
 
         if (clientes.size() > 0) {
 
@@ -127,7 +177,7 @@ public class App {
                             }
                         }
                     } else if (opcSelecionada == 1) {
-                        novaConta();
+                        
                         /*Random geradorConta = new Random();
 
                         int numConta = geradorConta.nextInt(51);
@@ -312,171 +362,4 @@ public class App {
             }
         }
     }
-    
-    public static void novaConta() throws ParseException{
-        List<Integer> menu_conta = new ArrayList<>();
-        menu_conta.add(1);
-        menu_conta.add(2);
-        menu_conta.add(3);
-        menu_conta.add(4);
-
-
-        int menuSelecionado = 1;
-        while (menu_conta.get(menuSelecionado) != 4) {
-            menuSelecionado = menu_nova_conta(menu_conta);
-            if (menu_conta.get(menuSelecionado) == 1) {
-                contaSalario();
-                break;
-            } else if (menu_conta.get(menuSelecionado) == 2) {
-                contaCorrente();
-                break;
-            }else if (menu_conta.get(menuSelecionado) == 3) {
-                contaPoupanca();
-                break;
-            }
-            
-        
-    }
-
-    
-    }
-    
-    public static int menu_nova_conta(List<Integer> menu_conta){
-        Object[] menusArray = menu_conta.toArray();
-        int opcaoSelecionad = JOptionPane.showOptionDialog(null,
-                "1. Conta-salário \n2. Conta corrente \n3. Conta poupança \n4. Sair",
-                "Menu",
-                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
-                menusArray, null);
-        return opcaoSelecionad;
-    }
-
-    public static void contaCorrente() throws ParseException{
-        Random geradorConta = new Random();
-
-        int numConta = geradorConta.nextInt(51);
-
-        /* Informações da pessoa */
-        String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
-        String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
-        String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
-        String email_p = JOptionPane.showInputDialog("Digite seu email: ");
-        String telefone_p = JOptionPane.showInputDialog("Digite seu telefone: ");
-        String data_p = JOptionPane.showInputDialog(null, "Digite sua data de nascimento: (dd/mm/yyyy)");
-
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        Date dataFormat = formato.parse(data_p);
-
-        /* Endereço */
-        String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
-        String numero_p = JOptionPane.showInputDialog("Digite o número da sua casa: ");
-        String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
-        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
-        String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
-
-        long convertor_num = Long.parseLong(numero_p);
-        long convertor_cep = Long.parseLong(Cep_p);
-        long telefone_conv = Long.parseLong(telefone_p);
-        
-        String tipo = "corrente";
-        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
-        Conta c1 = new Conta(numConta, tipo);
-        Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-
-        clientes.add(cliente);
-
-        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
-
-    }
-
-    public static void contaPoupanca() throws ParseException{
-        Random geradorConta = new Random();
-
-        int numConta = geradorConta.nextInt(51);
-
-        /* Informações da pessoa */
-        String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
-        String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
-        String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
-        String email_p = JOptionPane.showInputDialog("Digite seu email: ");
-        String telefone_p = JOptionPane.showInputDialog("Digite seu telefone: ");
-        String data_p = JOptionPane.showInputDialog(null, "Digite sua data de nascimento: (dd/mm/yyyy)");
-
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        Date dataFormat = formato.parse(data_p);
-
-        /* Endereço */
-        String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
-        String numero_p = JOptionPane.showInputDialog("Digite o número da sua casa: ");
-        String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
-        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
-        String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
-
-        long convertor_num = Long.parseLong(numero_p);
-        long convertor_cep = Long.parseLong(Cep_p);
-        long telefone_conv = Long.parseLong(telefone_p);
-        
-        String tipo = "poupança";
-        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
-        Conta c1 = new Conta(numConta, tipo);
-        Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-
-        clientes.add(cliente);
-
-        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
-        
-    }
-
-    public static void contaSalario() throws ParseException{
-        Random geradorConta = new Random();
-
-        int numConta = geradorConta.nextInt(51);
-        String B;
-        /* Informações da pessoa */
-        String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
-        String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
-        for (Cliente cliente : clientes) {
-            // Autenticando o cliente que será acessado
-            if (CPF_p.equals(cliente.getCPF())) {
-
-                for (Conta conta : cliente.getContas()) {
-                    // Autenticando a conta que será acessada
-                    if (cliente.getConta().getType() == "salário") {
-                        JOptionPane.showMessageDialog(null, "Você já tem uma conta salário!");
-                        
-                    }
-                }
-            }
-        }
-        
-        String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
-        String email_p = JOptionPane.showInputDialog("Digite seu email: ");
-        String telefone_p = JOptionPane.showInputDialog("Digite seu telefone: ");
-        String data_p = JOptionPane.showInputDialog(null, "Digite sua data de nascimento: (dd/mm/yyyy)");
-
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-        Date dataFormat = formato.parse(data_p);
-
-        /* Endereço */
-        String logradouro_p = JOptionPane.showInputDialog("Qual o nome da sua rua?");
-        String numero_p = JOptionPane.showInputDialog("Digite o número da sua casa: ");
-        String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
-        String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
-        String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
-
-        long convertor_num = Long.parseLong(numero_p);
-        long convertor_cep = Long.parseLong(Cep_p);
-        long telefone_conv = Long.parseLong(telefone_p);
-
-        String tipo = "salário";
-        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
-        Conta c1 = new Conta(numConta,tipo);
-        Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-
-        clientes.add(cliente);
-
-        JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
-
-    }
-
 }
