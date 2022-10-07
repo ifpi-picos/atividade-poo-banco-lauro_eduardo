@@ -7,17 +7,21 @@ import java.util.ArrayList;;
 public class Cliente {
     private final String CPF;
     private String nome;
+    private String email;
+    private long telefone;
     private Date dataNascimento;
     private Endereco endereco;
     private Conta conta;
     private List<Conta> contas = new ArrayList<>();
     private String senha;
 
-    public Cliente(String nome, String cpf, Endereco Endereco/*, Date data */, Conta conta, String senha){
+    public Cliente(String nome, String cpf, String email, long telefone, Endereco endereco, Date dataNascimento, Conta conta, String senha){
         this.nome = nome;
         this.CPF = cpf;
-        /*this.dataNascimento = data;*/
-        this.endereco = Endereco;
+        this.email = email;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.dataNascimento = dataNascimento;
         this.conta = conta;
         this.senha = senha;
         this.contas.add(conta);
@@ -29,6 +33,14 @@ public class Cliente {
 
     public String getCPF() {
         return CPF;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public long getTelefone() {
+        return telefone;
     }
 
     public List<Conta> getContas() {
