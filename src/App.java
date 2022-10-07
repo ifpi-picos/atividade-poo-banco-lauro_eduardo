@@ -343,5 +343,42 @@ public class App {
             }
         }
     }
+    
+    public static void novaConta(){
+        List<Integer> menu_conta = new ArrayList<>();
+        menu_conta.add(1);
+        menu_conta.add(2);
+        menu_conta.add(3);
+
+        int menuSelecionado = 1;
+        while (menu_conta.get(menuSelecionado) != 3) {
+            menuSelecionado = menu_nova_conta(menu_conta);
+            if (menu_conta.get(menuSelecionado) == 1) {
+                cadastrar();
+            } else if (menu_conta.get(menuSelecionado) == 2) {
+                entra();
+            }
+        
+    }
+
+    
+    }
+    public static int menu_nova_conta(List<Integer> menu_conta){
+        Object[] menusArray = menu_conta.toArray();
+        int opcaoSelecionad = JOptionPane.showOptionDialog(null,
+                "1. Conta corrente \n2. Conta poupança \n3. Sair",
+                "Menu",
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                menusArray, null);
+        return opcaoSelecionad;
+    }
+
+    public static void contaCorrente(){
+
+    }
+
+    public static void contaPoupanca(){
+        
+    }
 
 }
