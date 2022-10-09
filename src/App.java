@@ -62,14 +62,14 @@ public class App {
                 }
         }
         
-        List<Integer> menu = new ArrayList<>();
+        /*List<Integer> menu = new ArrayList<>();
                     menu.add(1);
                     menu.add(2);
 
         Object[] menuEntrar = menu.toArray();
         int opcSelecionada = JOptionPane.showOptionDialog(null,
                             "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
+                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);*/
 
         String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
         String email_p = JOptionPane.showInputDialog("Digite seu email: ");
@@ -92,18 +92,18 @@ public class App {
 
         Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
 
-        if(opcSelecionada == 0){
-            String tipo = "corrente";
+        //if(opcSelecionada == 0){
+            String tipo = "Normal";
             Conta c1 = new Conta(numConta, tipo);
             Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
             clientes.add(cliente);
 
-        }else if(opcSelecionada == 1){
-            String tipo = "poupança";
-            Conta c1 = new Conta(numConta, tipo);   
-            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-            clientes.add(cliente);
-        }
+        //}else if(opcSelecionada == 1){
+            //String tipo = "poupança";
+            //Conta c1 = new Conta(numConta, tipo);   
+           // Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            //clientes.add(cliente);
+        //}
 
         JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        
@@ -184,25 +184,26 @@ public class App {
                             }
                         }
                     } else if (opcSelecionada == 1) {
-                        List<Integer> menu_n = new ArrayList<>();
-                        menu.add(1);
-                        menu.add(2);
+                        List<Integer> menu_interativo = new ArrayList<>();
+                            menu_interativo.add(1);
+                            menu_interativo.add(2);
     
-                        Object[] menu_novo = menu_n.toArray();
-                        int opcSelecionada_novo = JOptionPane.showOptionDialog(null,
-                                "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
-                                JOptionPane.PLAIN_MESSAGE, null, menu_novo, null);
+                            Object[] menusArray = menu_interativo.toArray();
+                            int opcaoSelecionad = JOptionPane.showOptionDialog(null,
+                                    "1. Poupança \n2. Corrente ", "Menu",
+                                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
+                                    menusArray, null);
                         
                         Random geradorConta = new Random();
 
                         int numConta = geradorConta.nextInt(51);
 
-                        if(opcSelecionada_novo == 0){
-                            String tipo = "corrente";
+                        if(opcaoSelecionad == 0){
+                            String tipo = "Corrente";
                             Conta c = new Conta(numConta, tipo);
                             cliente.addConta(c);
-                        }else if(opcSelecionada_novo == 1){
-                            String tipo = "poupança";
+                        }else if(opcaoSelecionad == 1){
+                            String tipo = "Poupança";
                             Conta c = new Conta(numConta,tipo);
                             cliente.addConta(c);
                         }
@@ -378,7 +379,7 @@ public class App {
                         JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() + "\nTipo de conta: "+ cliente.getConta().getType());
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() + "\nTipo de conta: "+ conta.getType());
                     }
                 }
             }
