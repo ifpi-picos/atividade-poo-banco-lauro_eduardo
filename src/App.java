@@ -17,7 +17,7 @@ public class App {
 
     static List<Cliente> clientes = new ArrayList<>();
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] agrgs) throws Exception {
 
         List<Integer> menu = new ArrayList<>();
         menu.add(1);
@@ -57,7 +57,7 @@ public class App {
         for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
             if (CPF_p.equals(cliente.getCPF())) {
-                JOptionPane.showMessageDialog(null, "Esse CPF já está cadastrado");
+                JOptionPane.showMessageDialog(null, "Esse CPF já está cadastrado!");
                 entra();
                 }
         }
