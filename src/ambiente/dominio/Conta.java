@@ -4,7 +4,6 @@ public class Conta {
     private int numeroAgencia = 1;
     private int numeroConta;
     private double saldo = 0;
-    private String nomeCliente;
     private String Type;
     // private Cliente cliente;
 
@@ -12,10 +11,6 @@ public class Conta {
     public Conta(int numeroConta, String type){
         this.numeroConta = numeroConta;
         this.Type = type;
-    }
-
-    public String getNomeCliente() {
-        return this.nomeCliente;
     }
     
     public double getSaldo() {

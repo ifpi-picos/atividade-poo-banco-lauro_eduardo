@@ -5,7 +5,7 @@ import ambiente.dominio.Cliente;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+// import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,14 +62,14 @@ public class App {
                 }
         }
         
-        /*List<Integer> menu = new ArrayList<>();
+        List<Integer> menu = new ArrayList<>();
                     menu.add(1);
                     menu.add(2);
 
         Object[] menuEntrar = menu.toArray();
         int opcSelecionada = JOptionPane.showOptionDialog(null,
                             "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
-                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);*/
+                            JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
 
         String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
         String email_p = JOptionPane.showInputDialog("Digite seu email: ");
@@ -92,18 +92,32 @@ public class App {
 
         Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
 
-        //if(opcSelecionada == 0){
-            String tipo = "Normal";
+        String tipo = "";
+
+        if(opcSelecionada == 0){
+            tipo = "Corrente";
+            
+
+        }else if(opcSelecionada == 1){
+            tipo = "Poupança";
+        }
+
+        Conta c1 = new Conta(numConta, tipo);
+        Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+        clientes.add(cliente);
+
+        /* if(opcSelecionada == 0){
+            String tipo = "Corrente";
             Conta c1 = new Conta(numConta, tipo);
             Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
             clientes.add(cliente);
 
-        //}else if(opcSelecionada == 1){
-            //String tipo = "poupança";
-            //Conta c1 = new Conta(numConta, tipo);   
-           // Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-            //clientes.add(cliente);
-        //}
+        }else if(opcSelecionada == 1){
+            String tipo = "Poupança";
+            Conta c1 = new Conta(numConta, tipo);   
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            clientes.add(cliente);
+        } */
 
         JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        
@@ -199,11 +213,11 @@ public class App {
                         int numConta = geradorConta.nextInt(51);
 
                         if(opcaoSelecionad == 0){
-                            String tipo = "Corrente";
+                            String tipo = "Poupança";
                             Conta c = new Conta(numConta, tipo);
                             cliente.addConta(c);
                         }else if(opcaoSelecionad == 1){
-                            String tipo = "Poupança";
+                            String tipo = "Corrente";
                             Conta c = new Conta(numConta,tipo);
                             cliente.addConta(c);
                         }
