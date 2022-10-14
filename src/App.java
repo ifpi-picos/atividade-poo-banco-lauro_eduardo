@@ -85,12 +85,13 @@ public class App {
         String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
         String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
         String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
+        String id_gerado = id_endereco();
 
         long convertor_num = Long.parseLong(numero_p);
         long convertor_cep = Long.parseLong(Cep_p);
         long telefone_conv = Long.parseLong(telefone_p);
 
-        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
+        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep, id_gerado);
 
         String tipo = "";
 
@@ -105,19 +106,6 @@ public class App {
         Conta c1 = new Conta(numConta, tipo);
         Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
         clientes.add(cliente);
-
-        /* if(opcSelecionada == 0){
-            String tipo = "Corrente";
-            Conta c1 = new Conta(numConta, tipo);
-            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-            clientes.add(cliente);
-
-        }else if(opcSelecionada == 1){
-            String tipo = "Poupança";
-            Conta c1 = new Conta(numConta, tipo);   
-            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-            clientes.add(cliente);
-        } */
 
         JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        
@@ -393,10 +381,30 @@ public class App {
                         JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() + "\nTipo de conta: "+ conta.getType());
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType());
                     }
                 }
             }
         }
     }
+
+public static String id_endereco(){
+
+    Random geradorConta = new Random();
+
+    int num1 = geradorConta.nextInt(9);
+    int num2 = geradorConta.nextInt(9);
+    int num3 = geradorConta.nextInt(9);
+    int num4 = geradorConta.nextInt(9);
+    int num5 = geradorConta.nextInt(9);
+    int num6 = geradorConta.nextInt(9);
+    int num7 = geradorConta.nextInt(9);
+    int num8 = geradorConta.nextInt(9);
+    int num9 = geradorConta.nextInt(9);
+
+    String str = "" + num1 + num2 + num3 + num4 + num5+ num6 + num7 + num8 + num9;
+
+    return str;    
+}
+
 }
