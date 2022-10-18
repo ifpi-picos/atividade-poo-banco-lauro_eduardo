@@ -5,6 +5,7 @@ public class Conta {
     private int numeroConta;
     private double saldo = 0;
     private String Type;
+    private double cheque_especial = 3000;
     // private Cliente cliente;
 
   
@@ -30,6 +31,12 @@ public class Conta {
     }
     public String getType(){
         return this.Type;
+    }
+    public double getcheque_especial(){
+        return cheque_especial;
+    }
+    public void setcheque_especial(double cheque){
+        this.cheque_especial = cheque;
     }
 
 

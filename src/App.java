@@ -290,8 +290,23 @@ public class App {
                             conta.setSaldo(conta.getSaldo() - valorSaque);
                             JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
                         } else {
-                            JOptionPane.showMessageDialog(null,
-                                    "Você está tentando sacar um valor acima do seu saldo!");
+                           if(conta.getSaldo() > 0){
+                            if(conta.getcheque_especial() + conta.getSaldo() >= valorSaque ){
+                                conta.setSaldo(conta.getSaldo() - valorSaque);
+                                conta.setcheque_especial(conta.getcheque_especial() + analise);
+                                JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso! Usamos o cheque especial!");
+                            }else{
+                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo da sua conta com o cheque!");
+                            }
+                           }else{
+                            if(conta.getcheque_especial() >= valorSaque ){
+                                conta.setSaldo(conta.getSaldo() - valorSaque);
+                                conta.setcheque_especial(conta.getcheque_especial() + analise);
+                                JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso! Usamos o cheque especial!");
+                            }else{
+                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
+                            }
+                           }
                         }
                     }
                 }
@@ -300,6 +315,8 @@ public class App {
     }
 
     public static void trasferir(String CPF, int numConta) {
+
+
         String transferencia = JOptionPane.showInputDialog(null, "Qual valor deseja transferir?");
         String pesDestino = JOptionPane.showInputDialog(null, "Qual o CPF do destinatário?");
         String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
@@ -314,6 +331,8 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
+
+                        System.out.println(conta.getcheque_especial());
 
                         if (valorTransf <= conta.getSaldo()) {
 
@@ -330,7 +349,7 @@ public class App {
 
                                         List<Integer> cliConta = new ArrayList<>();
 
-                                        for (Conta cont : cli.getContas()) {
+                                       for (Conta cont : cli.getContas()) {
                                             cliConta.add(cont.getNumeroConta());
                                         }
 
@@ -361,8 +380,75 @@ public class App {
                                 break;
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null,
-                                    "Não é possível realizar uma transferência com valor superior ao seu saldo!");
+                                List<String> cliCPF = new ArrayList<>();
+                                for (Cliente c : clientes) {
+                                cliCPF.add(c.getCPF());
+                            }
+                                if (cliCPF.contains(pesDestino)) {
+
+                                    for (Cliente cli : clientes) {
+                                    // Autenticando o cliente que será acessado
+
+                                        if (pesDestino.equals(cli.getCPF())) {
+
+                                        List<Integer> cliConta = new ArrayList<>();
+
+                                        for (Conta cont : cli.getContas()) {
+                                            cliConta.add(cont.getNumeroConta());
+                                        }
+
+                                            if (cliConta.contains(numConDestino)) {
+
+                                                for (Conta cont : cli.getContas()) {
+                                                // Autenticando a conta que será acessada
+                                                    if (numConDestino == cont.getNumeroConta()) {
+
+                                                        Double analise = conta.getSaldo() - valorTransf;
+
+                                                        if(conta.getSaldo() > 0){
+                                        
+                                                            if(conta.getSaldo() + conta.getcheque_especial() >= valorTransf){
+                                                                conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                                conta.setcheque_especial(conta.getcheque_especial() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+
+                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                                break;
+
+                                                            }else{
+                                                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo da sua conta com o cheque!");
+                                                            }
+                                                        }else{
+                                                            if(conta.getcheque_especial() >= valorTransf){
+                                                                conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                                conta.setcheque_especial(conta.getcheque_especial() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+
+                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                                break;
+                                                            }else{
+                                                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
+                                                            }
+                                                        }
+
+                                                }
+                                            }
+
+                                        }else{
+                                            JOptionPane.showMessageDialog(null, "Conta não existe!");
+                                            break;
+                                        }
+
+                                    }
+                                }
+
+                            }else {
+                                JOptionPane.showMessageDialog(null, "Cliente não existe!");
+                                break;
+                            }
+
                         }
                     }
                 }
