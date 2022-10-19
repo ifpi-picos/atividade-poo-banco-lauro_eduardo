@@ -322,6 +322,7 @@ public class App {
         String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
 
         Double valorTransf = Double.parseDouble(transferencia);
+        Double taxaTransfPop = valorTransf*0.05;
         Integer numConDestino = Integer.parseInt(numDestino);
 
         for (Cliente cliente : clientes) {
@@ -333,6 +334,10 @@ public class App {
                     if (numConta == conta.getNumeroConta()) {
 
                         System.out.println(conta.getcheque_especial());
+
+                        if(conta.getType() == "Poupança"){
+
+                            valorTransf = valorTransf + taxaTransfPop;
 
                         if (valorTransf <= conta.getSaldo()) {
 
@@ -360,9 +365,9 @@ public class App {
                                                 if (numConDestino == cont.getNumeroConta()) {
 
                                                     conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                    JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+                                                    JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
 
-                                                    cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                    cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
 
                                                     break;
                                                 }
@@ -380,6 +385,7 @@ public class App {
                                 break;
                             }
                         } else {
+                            
                                 List<String> cliCPF = new ArrayList<>();
                                 for (Cliente c : clientes) {
                                 cliCPF.add(c.getCPF());
@@ -410,9 +416,9 @@ public class App {
                                                             if(conta.getSaldo() + conta.getcheque_especial() >= valorTransf){
                                                                 conta.setSaldo(conta.getSaldo() - valorTransf);
                                                                 conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                                                JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
+                                                                JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
 
-                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                                cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
 
                                                                 break;
 
@@ -450,6 +456,8 @@ public class App {
                             }
 
                         }
+                        
+                    }
                     }
                 }
             }
