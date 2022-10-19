@@ -323,6 +323,7 @@ public class App {
 
         Double valorTransf = Double.parseDouble(transferencia);
         Double taxaTransfPop = valorTransf*0.05;
+        Double taxaTransfCor = valorTransf*0.10;
         Integer numConDestino = Integer.parseInt(numDestino);
 
         for (Cliente cliente : clientes) {
@@ -338,6 +339,12 @@ public class App {
                         if(conta.getType() == "Poupança"){
 
                             valorTransf = valorTransf + taxaTransfPop;
+
+                        }else if(conta.getType() == "Corrente" && conta.getNumTransf() >= 2){
+
+                            valorTransf = valorTransf + taxaTransfCor;
+
+                        }
 
                         if (valorTransf <= conta.getSaldo()) {
 
@@ -364,12 +371,37 @@ public class App {
                                                 // Autenticando a conta que será acessada
                                                 if (numConDestino == cont.getNumeroConta()) {
 
-                                                    conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                    JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
+                                                    if(conta.getType() == "Poupança"){
 
-                                                    cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
+                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                        conta.setNumTransf(conta.getNumTransf() + 1);
+                                                        JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
 
-                                                    break;
+                                                        cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
+
+                                                        break;
+
+                                                    }else if(conta.getType() == "Corrente" && conta.getNumTransf() >= 2){
+
+                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                        conta.setNumTransf(conta.getNumTransf() + 1);
+                                                        JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfCor) + " transferido com sucesso!");
+
+                                                        cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfCor));
+
+                                                        break;
+
+                                                    }else{
+
+                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
+                                                        conta.setNumTransf(conta.getNumTransf() + 1);
+                                                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf+ " transferido com sucesso!");
+
+                                                        cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                        break;
+
+                                                    }
                                                 }
                                             }
                                         } else {
@@ -455,7 +487,7 @@ public class App {
                                 break;
                             }
 
-                        }
+                        
                         
                     }
                     }
@@ -475,7 +507,7 @@ public class App {
                         JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType());
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: " + conta.getNumTransf());
                     }
                 }
             }

@@ -6,7 +6,7 @@ public class Conta {
     private double saldo = 0;
     private String Type;
     private double cheque_especial = 3000;
-    // private Cliente cliente;
+    private int numTransf = 0;
 
   
     public Conta(int numeroConta, String type){
@@ -37,6 +37,14 @@ public class Conta {
     }
     public void setcheque_especial(double cheque){
         this.cheque_especial = cheque;
+    }
+
+    public int getNumTransf() {
+        return numTransf;
+    }
+
+    public void setNumTransf(int numTransf) {
+        this.numTransf = numTransf;
     }
 
 
