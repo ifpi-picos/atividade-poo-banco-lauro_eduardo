@@ -11,7 +11,6 @@ public class Cliente {
     private long telefone;
     private Date dataNascimento;
     private Endereco endereco;
-    private Conta conta;
     private List<Conta> contas = new ArrayList<>();
     private String senha;
 
@@ -22,7 +21,7 @@ public class Cliente {
         this.telefone = telefone;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
-        this.conta = conta;
+        /* this.conta = conta; */
         this.senha = senha;
         this.contas.add(conta);
     }
@@ -53,10 +52,6 @@ public class Cliente {
 
     public Endereco getEndereco() {
         return endereco;
-    }
-
-    public Conta getConta() {
-        return conta;
     }
 
     public String getSenha() {

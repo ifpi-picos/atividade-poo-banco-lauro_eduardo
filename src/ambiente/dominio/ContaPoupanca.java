@@ -1,5 +1,5 @@
 package ambiente.dominio;
 
-public class Corrente {
+public class ContaPoupanca {
     
 }
