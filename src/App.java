@@ -1,6 +1,8 @@
 import ambiente.dominio.Conta;
 import ambiente.dominio.Endereco;
 import ambiente.dominio.Cliente;
+import ambiente.dominio.ContaCorrente;
+import ambiente.dominio.ContaPoupanca;
 
 import java.util.Date;
 import java.text.ParseException;
@@ -97,15 +99,20 @@ public class App {
 
         if(opcSelecionada == 0){
             tipo = "Corrente";
-            
+            ContaCorrente c1 = new ContaCorrente(numConta, tipo);  
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            clientes.add(cliente);
 
         }else if(opcSelecionada == 1){
             tipo = "Poupança";
+            ContaPoupanca c1 = new ContaPoupanca(numConta, tipo);  
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            clientes.add(cliente);
         }
 
-        Conta c1 = new Conta(numConta, tipo);
-        Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-        clientes.add(cliente);
+        //Conta c1 = new Conta(numConta, tipo);
+        //Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+        //clientes.add(cliente);
 
         JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        

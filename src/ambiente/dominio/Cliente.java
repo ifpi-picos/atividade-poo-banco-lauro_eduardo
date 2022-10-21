@@ -21,7 +21,6 @@ public class Cliente {
         this.telefone = telefone;
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
-        /* this.conta = conta; */
         this.senha = senha;
         this.contas.add(conta);
     }
