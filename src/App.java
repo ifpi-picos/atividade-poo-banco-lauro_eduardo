@@ -259,10 +259,6 @@ public class App {
 
     public static void depositar(String CPF, int numConta) {
  
-        String deposito = JOptionPane.showInputDialog(null, "Qual valor deseja depositar?");
-
-        Double valorDep = Double.parseDouble(deposito);
-
         for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
             if (CPF.equals(cliente.getCPF())) {
@@ -270,8 +266,7 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
-                        conta.setSaldo(conta.getSaldo() + valorDep);
-                        JOptionPane.showMessageDialog(null, "Valor de " + valorDep + " depositado com sucesso!");
+                        conta.depositar(CPF, numConta, clientes);
                     }
                 }
             }
@@ -280,10 +275,6 @@ public class App {
     }
 
     public static void sacar(String CPF, int numConta) {
-         String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
-
-        Double valorSaque = Double.parseDouble(saque);
-
         for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
             if (CPF.equals(cliente.getCPF())) {
@@ -291,30 +282,7 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
-
-                        Double analise = conta.getSaldo() - valorSaque;
-                        if (analise >= 0) {
-                            conta.setSaldo(conta.getSaldo() - valorSaque);
-                            JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
-                        } else {
-                           if(conta.getSaldo() > 0){
-                            if(conta.getcheque_especial() + conta.getSaldo() >= valorSaque ){
-                                conta.setSaldo(conta.getSaldo() - valorSaque);
-                                conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso! Usamos o cheque especial!");
-                            }else{
-                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo da sua conta com o cheque!");
-                            }
-                           }else{
-                            if(conta.getcheque_especial() >= valorSaque ){
-                                conta.setSaldo(conta.getSaldo() - valorSaque);
-                                conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso! Usamos o cheque especial!");
-                            }else{
-                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
-                            }
-                           }
-                        }
+                        conta.sacar(CPF, numConta, clientes);
                     }
                 }
             }
@@ -344,17 +312,25 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
-                        JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
+
+                        if(conta.getType() == "Corrente"){
+                            JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: ");
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: " + ContaCorrente.getNumtrans());
+                        }else{
+                            JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
+                                + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
+                                + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType());
+                        }
                     }
                 }
             }
         }
     }
 
-public static String id_endereco(){
+    public static String id_endereco(){
 
     Random geradorConta = new Random();
 
@@ -373,4 +349,4 @@ public static String id_endereco(){
     return str;    
 }
 
-}
+    }
