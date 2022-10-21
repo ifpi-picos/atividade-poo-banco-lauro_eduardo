@@ -1,12 +1,13 @@
 package ambiente.dominio;
 
-public class Conta {
+import java.util.List;
+
+public abstract class Conta {
     private int numeroAgencia;
     private int numeroConta;
     private double saldo;
     private String Type;
     private double cheque_especial = 3000;
-    private int numTransf = 0;
 
 
     public Conta(int numConta, String tipo){
@@ -46,13 +47,6 @@ public class Conta {
         this.cheque_especial = cheque;
     }
 
-    public int getNumTransf() {
-        return numTransf;
-    }
-
-    public void setNumTransf(int numTransf) {
-        this.numTransf = numTransf;
-    }
-
+    public abstract void trasferir(String CPF, int numConta, List<Cliente> clientes);
 
 }

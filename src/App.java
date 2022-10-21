@@ -209,11 +209,11 @@ public class App {
 
                         if(opcaoSelecionad == 0){
                             String tipo = "Poupança";
-                            Conta c = new Conta(numConta, tipo);
+                            ContaPoupanca c = new ContaPoupanca(numConta, tipo);
                             cliente.addConta(c);
                         }else if(opcaoSelecionad == 1){
                             String tipo = "Corrente";
-                            Conta c = new Conta(numConta,tipo);
+                            ContaCorrente c = new ContaCorrente(numConta,tipo);
                             cliente.addConta(c);
                         }
                         
@@ -280,7 +280,7 @@ public class App {
     }
 
     public static void sacar(String CPF, int numConta) {
-        String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
+         String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
 
         Double valorSaque = Double.parseDouble(saque);
 
@@ -322,17 +322,6 @@ public class App {
     }
 
     public static void trasferir(String CPF, int numConta) {
-
-
-        String transferencia = JOptionPane.showInputDialog(null, "Qual valor deseja transferir?");
-        String pesDestino = JOptionPane.showInputDialog(null, "Qual o CPF do destinatário?");
-        String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
-
-        Double valorTransf = Double.parseDouble(transferencia);
-        Double taxaTransfPop = valorTransf*0.05;
-        Double taxaTransfCor = valorTransf*0.10;
-        Integer numConDestino = Integer.parseInt(numDestino);
-
         for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
             if (CPF.equals(cliente.getCPF())) {
@@ -340,163 +329,7 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
-
-                        System.out.println(conta.getcheque_especial());
-
-                        if(conta.getType() == "Poupança"){
-
-                            valorTransf = valorTransf + taxaTransfPop;
-
-                        }else if(conta.getType() == "Corrente" && conta.getNumTransf() >= 2){
-
-                            valorTransf = valorTransf + taxaTransfCor;
-
-                        }
-
-                        if (valorTransf <= conta.getSaldo()) {
-
-                            List<String> cliCPF = new ArrayList<>();
-                            for (Cliente c : clientes) {
-                                cliCPF.add(c.getCPF());
-                            }
-
-                            if (cliCPF.contains(pesDestino)) {
-
-                                for (Cliente cli : clientes) {
-                                    // Autenticando o cliente que será acessado
-                                    if (pesDestino.equals(cli.getCPF())) {
-
-                                        List<Integer> cliConta = new ArrayList<>();
-
-                                       for (Conta cont : cli.getContas()) {
-                                            cliConta.add(cont.getNumeroConta());
-                                        }
-
-                                        if (cliConta.contains(numConDestino)) {
-
-                                            for (Conta cont : cli.getContas()) {
-                                                // Autenticando a conta que será acessada
-                                                if (numConDestino == cont.getNumeroConta()) {
-
-                                                    if(conta.getType() == "Poupança"){
-
-                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                        conta.setNumTransf(conta.getNumTransf() + 1);
-                                                        JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
-
-                                                        cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
-
-                                                        break;
-
-                                                    }else if(conta.getType() == "Corrente" && conta.getNumTransf() >= 2){
-
-                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                        conta.setNumTransf(conta.getNumTransf() + 1);
-                                                        JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfCor) + " transferido com sucesso!");
-
-                                                        cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfCor));
-
-                                                        break;
-
-                                                    }else{
-
-                                                        conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                        conta.setNumTransf(conta.getNumTransf() + 1);
-                                                        JOptionPane.showMessageDialog(null, "Valor de " + valorTransf+ " transferido com sucesso!");
-
-                                                        cont.setSaldo(cont.getSaldo() + valorTransf);
-
-                                                        break;
-
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "Conta não existe!");
-                                            break;
-                                        }
-
-                                    }
-                                }
-
-                            } else {
-                                JOptionPane.showMessageDialog(null, "Cliente não existe!");
-                                break;
-                            }
-                        } else {
-                            
-                                List<String> cliCPF = new ArrayList<>();
-                                for (Cliente c : clientes) {
-                                cliCPF.add(c.getCPF());
-                            }
-                                if (cliCPF.contains(pesDestino)) {
-
-                                    for (Cliente cli : clientes) {
-                                    // Autenticando o cliente que será acessado
-
-                                        if (pesDestino.equals(cli.getCPF())) {
-
-                                        List<Integer> cliConta = new ArrayList<>();
-
-                                        for (Conta cont : cli.getContas()) {
-                                            cliConta.add(cont.getNumeroConta());
-                                        }
-
-                                            if (cliConta.contains(numConDestino)) {
-
-                                                for (Conta cont : cli.getContas()) {
-                                                // Autenticando a conta que será acessada
-                                                    if (numConDestino == cont.getNumeroConta()) {
-
-                                                        Double analise = conta.getSaldo() - valorTransf;
-
-                                                        if(conta.getSaldo() > 0){
-                                        
-                                                            if(conta.getSaldo() + conta.getcheque_especial() >= valorTransf){
-                                                                conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                                conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                                                JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf - taxaTransfPop) + " transferido com sucesso!");
-
-                                                                cont.setSaldo(cont.getSaldo() + (valorTransf - taxaTransfPop));
-
-                                                                break;
-
-                                                            }else{
-                                                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo da sua conta com o cheque!");
-                                                            }
-                                                        }else{
-                                                            if(conta.getcheque_especial() >= valorTransf){
-                                                                conta.setSaldo(conta.getSaldo() - valorTransf);
-                                                                conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                                                JOptionPane.showMessageDialog(null, "Valor de " + valorTransf + " transferido com sucesso!");
-
-                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
-
-                                                                break;
-                                                            }else{
-                                                                JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
-                                                            }
-                                                        }
-
-                                                }
-                                            }
-
-                                        }else{
-                                            JOptionPane.showMessageDialog(null, "Conta não existe!");
-                                            break;
-                                        }
-
-                                    }
-                                }
-
-                            }else {
-                                JOptionPane.showMessageDialog(null, "Cliente não existe!");
-                                break;
-                            }
-
-                        
-                        
-                    }
+                        conta.trasferir(CPF, numConta, clientes);
                     }
                 }
             }
@@ -514,7 +347,7 @@ public class App {
                         JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: " + conta.getNumTransf());
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: ");
                     }
                 }
             }
