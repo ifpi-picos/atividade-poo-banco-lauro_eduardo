@@ -35,6 +35,7 @@ public class ContaCorrente extends Conta{
     
     @Override
     public void trasferir(String CPF, int numConta, List<Cliente> clientes){
+        System.out.println(getCheque());
         String transferencia = JOptionPane.showInputDialog(null, "Qual valor deseja transferir?");
         String pesDestino = JOptionPane.showInputDialog(null, "Qual o CPF do destinatário?");
         String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
