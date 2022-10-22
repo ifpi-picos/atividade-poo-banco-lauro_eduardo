@@ -6,7 +6,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ContaCorrente extends Conta{
-    private static double cheque_especial = 3000;
+    private double cheque_especial = 3000;
     private static int numTransf = 0;
     
     public ContaCorrente(int numeroAgencia, int numeroConta, float saldo, String Type){
@@ -26,10 +26,10 @@ public class ContaCorrente extends Conta{
         numTransf = numero;
     }
 
-    public static double getCheque(){
+    public double getCheque(){
         return cheque_especial;
     }
-    public static void setCheque(double cheque){
+    public void setCheque(double cheque){
         cheque_especial = cheque;
     }
     
@@ -202,7 +202,7 @@ public class ContaCorrente extends Conta{
             // Autenticando o cliente que será acessado
             if (CPF.equals(cliente.getCPF())) {
 
-                for (Conta conta : cliente.getContas()) {
+                for (ContaCorrente conta : cliente.getContasCor()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
 
@@ -212,18 +212,9 @@ public class ContaCorrente extends Conta{
                             JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
                         } else {
                             if (conta.getSaldo() > 0) {
-                                /* if (conta.getcheque_especial() + conta.getSaldo() >= valorSaque) {
+                                if (conta.getCheque() + conta.getSaldo() >= valorSaque) {
                                     conta.setSaldo(conta.getSaldo() - valorSaque);
-                                    conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                    JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
-                                            + " sacado com sucesso! Usamos o cheque especial!");
-                                } else {
-                                    JOptionPane.showMessageDialog(null,
-                                            "O valor ultrapassa o saldo da sua conta com o cheque!");
-                                } */
-                                if (getCheque() + conta.getSaldo() >= valorSaque) {
-                                    conta.setSaldo(conta.getSaldo() - valorSaque);
-                                    setCheque(getCheque() + analise);
+                                    conta.setCheque(conta.getCheque() + analise);
                                     JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
                                             + " sacado com sucesso! Usamos o cheque especial!");
                                 } else {
@@ -231,17 +222,9 @@ public class ContaCorrente extends Conta{
                                             "O valor ultrapassa o saldo da sua conta com o cheque!");
                                 }
                             } else {
-                                /* if (conta.getcheque_especial() >= valorSaque) {
+                                if (conta.getCheque() >= valorSaque) {
                                     conta.setSaldo(conta.getSaldo() - valorSaque);
-                                    conta.setcheque_especial(conta.getcheque_especial() + analise);
-                                    JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
-                                            + " sacado com sucesso! Usamos o cheque especial!");
-                                } else {
-                                    JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
-                                } */
-                                if (getCheque() >= valorSaque) {
-                                    conta.setSaldo(conta.getSaldo() - valorSaque);
-                                    setCheque(getCheque() + analise);
+                                    conta.setCheque(conta.getCheque() + analise);
                                     JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
                                             + " sacado com sucesso! Usamos o cheque especial!");
                                 } else {

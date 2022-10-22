@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.ArrayList;;
 
 public class Cliente {
-    private final String CPF;
+    private String CPF;
     private String nome;
     private String email;
     private long telefone;
     private Date dataNascimento;
     private Endereco endereco;
     private List<Conta> contas = new ArrayList<>();
+    private List<ContaCorrente> contasCor = new ArrayList<>();
+    private List<ContaPoupanca> contasPop = new ArrayList<>();
     private String senha;
 
-    public Cliente(String nome, String cpf, String email, long telefone, Endereco endereco, Date dataNascimento, Conta conta, String senha){
+    public Cliente(String nome, String cpf, String email, long telefone, Endereco endereco, Date dataNascimento, /* Conta conta, */ String senha){
         this.nome = nome;
         this.CPF = cpf;
         this.email = email;
@@ -22,7 +24,7 @@ public class Cliente {
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
         this.senha = senha;
-        this.contas.add(conta);
+        // this.contas.add(conta);
     }
 
     public String getNome() {
@@ -41,8 +43,29 @@ public class Cliente {
         return telefone;
     }
 
+    // Listas de Contas
     public List<Conta> getContas() {
         return contas;
+    }
+
+    public List<ContaCorrente> getContasCor() {
+        return contasCor;
+    }
+
+    public List<ContaPoupanca> getContasPop() {
+        return contasPop;
+    }
+
+    public void addConta(Conta conta){
+        this.contas.add(conta);
+    }
+
+    public void addContaCor(ContaCorrente conta){
+        this.contasCor.add(conta);
+    }
+
+    public void addContaPop(ContaPoupanca conta){
+        this.contasPop.add(conta);
     }
 
     public Date getDataNascimento() {
@@ -55,9 +78,5 @@ public class Cliente {
 
     public String getSenha() {
         return senha;
-    }
-
-    public void addConta(Conta conta){
-        this.contas.add(conta);
     }
 }

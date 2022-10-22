@@ -100,13 +100,17 @@ public class App {
         if(opcSelecionada == 0){
             tipo = "Corrente";
             ContaCorrente c1 = new ContaCorrente(numConta, tipo);  
-            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, senha_p);
+            cliente.addContaCor(c1);
+            cliente.addConta(c1);
             clientes.add(cliente);
 
         }else if(opcSelecionada == 1){
             tipo = "Poupança";
             ContaPoupanca c1 = new ContaPoupanca(numConta, tipo);  
-            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
+            Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, senha_p);
+            cliente.addContaPop(c1);
+            cliente.addConta(c1);
             clientes.add(cliente);
         }
 
@@ -210,10 +214,12 @@ public class App {
                         if(opcaoSelecionad == 0){
                             String tipo = "Poupança";
                             ContaPoupanca c = new ContaPoupanca(numConta, tipo);
+                            cliente.addContaPop(c);
                             cliente.addConta(c);
                         }else if(opcaoSelecionad == 1){
                             String tipo = "Corrente";
                             ContaCorrente c = new ContaCorrente(numConta,tipo);
+                            cliente.addContaCor(c);
                             cliente.addConta(c);
                         }
                         

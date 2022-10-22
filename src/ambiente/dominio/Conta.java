@@ -8,7 +8,6 @@ public abstract class Conta {
     private int numeroConta;
     private double saldo;
     private String Type;
-    // private double cheque_especial = 3000;
 
     public Conta(int numConta, String tipo) {
         this.numeroConta = numConta;
@@ -41,14 +40,7 @@ public abstract class Conta {
     public String getType() {
         return this.Type;
     }
-
-    /* public double getcheque_especial() {
-        return cheque_especial;
-    }
-
-    public void setcheque_especial(double cheque) {
-        this.cheque_especial = cheque;
-    } */
+    
 
     public abstract void trasferir(String CPF, int numConta, List<Cliente> clientes);
 
