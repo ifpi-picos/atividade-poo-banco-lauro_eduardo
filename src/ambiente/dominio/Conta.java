@@ -8,7 +8,7 @@ public abstract class Conta {
     private int numeroConta;
     private double saldo;
     private String Type;
-    private double cheque_especial = 3000;
+    // private double cheque_especial = 3000;
 
     public Conta(int numConta, String tipo) {
         this.numeroConta = numConta;
@@ -42,41 +42,17 @@ public abstract class Conta {
         return this.Type;
     }
 
-    public double getcheque_especial() {
+    /* public double getcheque_especial() {
         return cheque_especial;
     }
 
     public void setcheque_especial(double cheque) {
         this.cheque_especial = cheque;
-    }
+    } */
 
     public abstract void trasferir(String CPF, int numConta, List<Cliente> clientes);
 
-    public void sacar(String CPF, int numConta, List<Cliente> clientes) {
-        String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
-
-        Double valorSaque = Double.parseDouble(saque);
-
-        for (Cliente cliente : clientes) {
-            // Autenticando o cliente que será acessado
-            if (CPF.equals(cliente.getCPF())) {
-
-                for (Conta conta : cliente.getContas()) {
-                    // Autenticando a conta que será acessada
-                    if (numConta == conta.getNumeroConta()) {
-
-                        Double analise = conta.getSaldo() - valorSaque;
-                        if (analise >= 0) {
-                            conta.setSaldo(conta.getSaldo() - valorSaque);
-                            JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Saldo Insuficiente!");
-                        }
-                    }
-                }
-            }
-        }
-    }
+    public abstract void sacar(String CPF, int numConta, List<Cliente> clientes);
 
     public void depositar(String CPF, int numConta, List<Cliente> clientes) {
  

@@ -5,42 +5,39 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+public class ContaPoupanca extends Conta {
 
-public class ContaPoupanca extends Conta{
-
-    
-    public ContaPoupanca(int numeroAgencia, int numeroConta, float saldo, String Type){
+    public ContaPoupanca(int numeroAgencia, int numeroConta, float saldo, String Type) {
         super(numeroAgencia, numeroConta, saldo, Type);
 
     }
 
-    public ContaPoupanca(int numConta, String Type){
+    public ContaPoupanca(int numConta, String Type) {
         super(numConta, Type);
     }
 
     @Override
-    public void trasferir(String CPF, int numConta, List<Cliente> clientes){
-
+    public void trasferir(String CPF, int numConta, List<Cliente> clientes) {
 
         String transferencia = JOptionPane.showInputDialog(null, "Qual valor deseja transferir?");
         String pesDestino = JOptionPane.showInputDialog(null, "Qual o CPF do destinatário?");
         String numDestino = JOptionPane.showInputDialog(null, "Qual o número da conta do destinatário?");
         Double valorTransf = Double.parseDouble(transferencia);
-        Double taxaTransfPop = valorTransf*0.05;
+        Double taxaTransfPop = valorTransf * 0.05;
         Integer numConDestino = Integer.parseInt(numDestino);
 
         for (Cliente cliente : clientes) {
             // Autenticando o cliente que será acessado
-           
+
             if (CPF.equals(cliente.getCPF())) {
-               
+
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
-                   
+
                     if (numConta == conta.getNumeroConta()) {
-                       
+
                         if (valorTransf <= conta.getSaldo()) {
-                           
+
                             List<String> cliCPF = new ArrayList<>();
                             for (Cliente c : clientes) {
                                 cliCPF.add(c.getCPF());
@@ -54,7 +51,7 @@ public class ContaPoupanca extends Conta{
 
                                         List<Integer> cliConta = new ArrayList<>();
 
-                                       for (Conta cont : cli.getContas()) {
+                                        for (Conta cont : cli.getContas()) {
                                             cliConta.add(cont.getNumeroConta());
                                         }
 
@@ -64,35 +61,60 @@ public class ContaPoupanca extends Conta{
                                                 // Autenticando a conta que será acessada
                                                 if (numConDestino == cont.getNumeroConta()) {
 
-                                                        conta.setSaldo(conta.getSaldo() - (valorTransf + taxaTransfPop));
-                                                        JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf) + " transferido com sucesso!");
+                                                    conta.setSaldo(conta.getSaldo() - (valorTransf + taxaTransfPop));
+                                                    JOptionPane.showMessageDialog(null,
+                                                            "Valor de " + (valorTransf) + " transferido com sucesso!");
 
-                                                        cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                    cont.setSaldo(cont.getSaldo() + (valorTransf));
 
-                                                        break;
+                                                    break;
 
-                                                    
-
-                                                    }
-
-                                                    }
                                                 }
+
                                             }
-                                        } 
-                                    }else{
-                                        JOptionPane.showMessageDialog(null, "O CPF que você digitou está inválido!");
-                                        //CPF da pessoa que vai enviar
+                                        }
                                     }
-                                }else{
-                                    JOptionPane.showMessageDialog(null, "O valor que você quer transferir é maior que seu saldo!");
-                                    //Se o valor da transferência for menor
                                 }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "O CPF que você digitou está inválido!");
+                                // CPF da pessoa que vai enviar
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "O valor que você quer transferir é maior que seu saldo!");
+                            // Se o valor da transferência for menor
                         }
                     }
                 }
             }
-        
-        
+        }
+    }
+
+    @Override
+    public void sacar(String CPF, int numConta, List<Cliente> clientes) {
+        String saque = JOptionPane.showInputDialog(null, "Qual valor deseja sacar?");
+
+        Double valorSaque = Double.parseDouble(saque);
+
+        for (Cliente cliente : clientes) {
+            // Autenticando o cliente que será acessado
+            if (CPF.equals(cliente.getCPF())) {
+
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
+
+                        Double analise = conta.getSaldo() - valorSaque;
+                        if (analise >= 0) {
+                            conta.setSaldo(conta.getSaldo() - valorSaque);
+                            JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Saldo Insuficiente!");
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 }
