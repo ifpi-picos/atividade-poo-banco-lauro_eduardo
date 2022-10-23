@@ -49,7 +49,7 @@ public class ContaCorrente extends Conta {
             // Autenticando o cliente que será acessado
             if (CPF.equals(cliente.getCPF())) {
 
-                for (Conta conta : cliente.getContas()) {
+                for (ContaCorrente conta : cliente.getContasCor()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
 
@@ -74,15 +74,15 @@ public class ContaCorrente extends Conta {
 
                                         if (cliConta.contains(numConDestino)) {
 
-                                            for (ContaCorrente cont : cli.getContasCor()) {
+                                            for (Conta cont : cli.getContas()) {
                                                 // Autenticando a conta que será acessada
                                                 if (numConDestino == cont.getNumeroConta()) {
 
-                                                    if (getNumtrans() >= 2) {
+                                                    if (conta.getNumtrans() >= 2) {
 
                                                         conta.setSaldo(
                                                                 conta.getSaldo() - (valorTransf + taxaTransfCor));
-                                                        cont.setNumTransf(cont.getNumtrans() + 1);
+                                                        conta.setNumTransf(conta.getNumtrans() + 1);
                                                         JOptionPane.showMessageDialog(null, "Valor de " + (valorTransf)
                                                                 + " transferido com sucesso!");
 
@@ -137,47 +137,93 @@ public class ContaCorrente extends Conta {
 
                                         if (cliConta.contains(numConDestino)) {
 
-                                            for (ContaCorrente cont : cli.getContasCor()) {
+                                            for (Conta cont : cli.getContas()) {
                                                 // Autenticando a conta que será acessada
                                                 if (numConDestino == cont.getNumeroConta()) {
 
-                                                    Double analise = conta.getSaldo() - (valorTransf + taxaTransfCor);
+                                                    if (conta.getNumtrans() >= 2) {
 
-                                                    if (conta.getSaldo() > 0) {
+                                                        Double analise = conta.getSaldo()
+                                                                - (valorTransf + taxaTransfCor);
 
-                                                        if (conta.getSaldo()
-                                                                + cont.getCheque() >= (valorTransf + taxaTransfCor)) {
-                                                            conta.setSaldo(
-                                                                    conta.getSaldo() - (valorTransf + taxaTransfCor));
-                                                            cont.setCheque(cont.getCheque() + analise);
-                                                            JOptionPane.showMessageDialog(null, "Valor de "
-                                                                    + (valorTransf) + " transferido com sucesso!");
+                                                        if (conta.getSaldo() > 0) {
 
-                                                            cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                            if (conta.getSaldo()
+                                                                    + conta.getCheque() >= (valorTransf
+                                                                            + taxaTransfCor)) {
+                                                                conta.setSaldo(
+                                                                        conta.getSaldo()
+                                                                                - (valorTransf + taxaTransfCor));
+                                                                conta.setCheque(conta.getCheque() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de "
+                                                                        + (valorTransf) + " transferido com sucesso!");
 
-                                                            break;
+                                                                cont.setSaldo(cont.getSaldo() + (valorTransf));
 
+                                                                break;
+
+                                                            } else {
+                                                                JOptionPane.showMessageDialog(null,
+                                                                        "O valor ultrapassa o saldo da sua conta com o cheque!");
+                                                            }
                                                         } else {
-                                                            JOptionPane.showMessageDialog(null,
-                                                                    "O valor ultrapassa o saldo da sua conta com o cheque!");
+                                                            if (conta.getCheque() >= (valorTransf + taxaTransfCor)) {
+                                                                conta.setSaldo(
+                                                                        conta.getSaldo()
+                                                                                - (valorTransf + taxaTransfCor));
+                                                                conta.setCheque(conta.getCheque() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de "
+                                                                        + valorTransf + " transferido com sucesso!");
+
+                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                                break;
+                                                            } else {
+                                                                JOptionPane.showMessageDialog(null,
+                                                                        "O valor ultrapassa o saldo do cheque!");
+                                                            }
                                                         }
-                                                    } else {
-                                                        if (cont.getCheque() >= (valorTransf + taxaTransfCor)) {
-                                                            conta.setSaldo(
-                                                                    conta.getSaldo() - (valorTransf + taxaTransfCor));
-                                                            cont.setCheque(cont.getCheque() + analise);
-                                                            JOptionPane.showMessageDialog(null, "Valor de "
-                                                                    + valorTransf + " transferido com sucesso!");
+                                                    }else{
+                                                        Double analise = conta.getSaldo()
+                                                                - valorTransf;
 
-                                                            cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                        if (conta.getSaldo() > 0) {
 
-                                                            break;
+                                                            if (conta.getSaldo()
+                                                                    + conta.getCheque() >= valorTransf) {
+                                                                conta.setSaldo(
+                                                                        conta.getSaldo()
+                                                                                - valorTransf);
+                                                                conta.setCheque(conta.getCheque() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de "
+                                                                        + (valorTransf) + " transferido com sucesso!");
+
+                                                                cont.setSaldo(cont.getSaldo() + (valorTransf));
+
+                                                                break;
+
+                                                            } else {
+                                                                JOptionPane.showMessageDialog(null,
+                                                                        "O valor ultrapassa o saldo da sua conta com o cheque!");
+                                                            }
                                                         } else {
-                                                            JOptionPane.showMessageDialog(null,
-                                                                    "O valor ultrapassa o saldo do cheque!");
+                                                            if (conta.getCheque() >= valorTransf) {
+                                                                conta.setSaldo(
+                                                                        conta.getSaldo()
+                                                                                - valorTransf);
+                                                                conta.setCheque(conta.getCheque() + analise);
+                                                                JOptionPane.showMessageDialog(null, "Valor de "
+                                                                        + valorTransf + " transferido com sucesso!");
+
+                                                                cont.setSaldo(cont.getSaldo() + valorTransf);
+
+                                                                break;
+                                                            } else {
+                                                                JOptionPane.showMessageDialog(null,
+                                                                        "O valor ultrapassa o saldo do cheque!");
+                                                            }
                                                         }
                                                     }
-
                                                 }
                                             }
 
