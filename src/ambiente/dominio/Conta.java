@@ -60,6 +60,32 @@ public abstract class Conta {
                     if (numConta == conta.getNumeroConta()) {
                         conta.setSaldo(conta.getSaldo() + valorDep);
                         JOptionPane.showMessageDialog(null, "Valor de " + valorDep + " depositado com sucesso!");
+                        String e = cliente.getEmail();
+                        Long n = cliente.getTelefone();
+                        String operacao = "deposito";
+                        Email email = new Email();
+                        email.enviarnotificacao(operacao, valorDep, e , n);
+                        Sms sms = new Sms();
+                        sms.enviarnotificacao(operacao, valorDep, e, n);
+                    }
+                }
+            }
+        }
+        
+
+    }
+
+    public void verSaldo(String CPF, int numConta, List<Cliente> clientes) {
+        
+        for (Cliente cliente : clientes) {
+            // Autenticando o cliente que será acessado
+            if (CPF.equals(cliente.getCPF())) {
+
+                for (Conta conta : cliente.getContas()) {
+                    // Autenticando a conta que será acessada
+                    if (numConta == conta.getNumeroConta()) {
+                        JOptionPane.showMessageDialog(null,
+                                "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
                     }
                 }
             }

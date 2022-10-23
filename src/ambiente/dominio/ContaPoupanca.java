@@ -66,6 +66,13 @@ public class ContaPoupanca extends Conta {
                                                             "Valor de " + (valorTransf) + " transferido com sucesso!");
 
                                                     cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                    String e = cliente.getEmail();
+                                                    Long n = cliente.getTelefone();
+                                                    String operacao = "transferência";
+                                                    Email email = new Email();
+                                                    email.enviarnotificacao(operacao, valorTransf,e,n);
+                                                    Sms sms = new Sms();
+                                                    sms.enviarnotificacao(operacao, valorTransf,e,n);
 
                                                     break;
 
@@ -108,6 +115,13 @@ public class ContaPoupanca extends Conta {
                         if (analise >= 0) {
                             conta.setSaldo(conta.getSaldo() - valorSaque);
                             JOptionPane.showMessageDialog(null, "Valor de " + valorSaque + " sacado com sucesso!");
+                            String e = cliente.getEmail();
+                            Long n = cliente.getTelefone();
+                            String operacao = "o saque";
+                            Email email = new Email();
+                            email.enviarnotificacao(operacao, valorSaque,e,n);
+                            Sms sms = new Sms();
+                            sms.enviarnotificacao(operacao, valorSaque,e,n);
                         } else {
                             JOptionPane.showMessageDialog(null, "Saldo Insuficiente!");
                         }

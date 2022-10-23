@@ -1,8 +1,12 @@
 import ambiente.dominio.Conta;
 import ambiente.dominio.Endereco;
+import ambiente.dominio.Notificacao;
 import ambiente.dominio.Cliente;
 import ambiente.dominio.ContaCorrente;
 import ambiente.dominio.ContaPoupanca;
+import ambiente.dominio.Email;
+import javax.activation.*;
+import javax.management.Notification;
 
 import java.util.Date;
 import java.text.ParseException;
@@ -19,7 +23,8 @@ public class App {
 
     static List<Cliente> clientes = new ArrayList<>();
 
-    public static void main(String[] agrgs) throws Exception {
+    public static void main(String[] agrgs) throws ParseException {
+
 
         List<Integer> menu = new ArrayList<>();
         menu.add(1);
@@ -254,8 +259,7 @@ public class App {
                 for (Conta conta : cliente.getContas()) {
                     // Autenticando a conta que será acessada
                     if (numConta == conta.getNumeroConta()) {
-                        JOptionPane.showMessageDialog(null,
-                                "Cliente: " + cliente.getNome() + "\nSaldo: " + conta.getSaldo());
+                       conta.verSaldo(CPF, numConta, clientes);
                     }
                 }
             }
@@ -308,6 +312,8 @@ public class App {
                 }
             }
         }
+        
+        
     }
 
     public static void verPerfil(String CPF, int numConta) {

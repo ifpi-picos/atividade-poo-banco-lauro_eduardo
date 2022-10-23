@@ -87,6 +87,13 @@ public class ContaCorrente extends Conta {
                                                                 + " transferido com sucesso!");
 
                                                         cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                        String e = cliente.getEmail();
+                                                        Long n = cliente.getTelefone();
+                                                        String operacao = "a traferência";
+                                                        Email email = new Email();
+                                                        email.enviarnotificacao(operacao, valorTransf, e, n);
+                                                        Sms sms = new Sms();
+                                                        sms.enviarnotificacao(operacao, valorTransf, e, n);
 
                                                         break;
 
@@ -98,6 +105,13 @@ public class ContaCorrente extends Conta {
                                                                 + " transferido com sucesso!");
 
                                                         cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                        String e = cliente.getEmail();
+                                                        Long n = cliente.getTelefone();
+                                                        String operacao = "a traferência";
+                                                        Email email = new Email();
+                                                        email.enviarnotificacao(operacao, valorTransf, e, n);
+                                                        Sms sms = new Sms();
+                                                        sms.enviarnotificacao(operacao, valorTransf, e, n);
 
                                                         break;
 
@@ -159,6 +173,13 @@ public class ContaCorrente extends Conta {
                                                                         + (valorTransf) + " transferido com sucesso!");
 
                                                                 cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                                String e = cliente.getEmail();
+                                                                Long n = cliente.getTelefone();
+                                                                String operacao = "a traferência";
+                                                                Email email = new Email();
+                                                                email.enviarnotificacao(operacao, valorTransf, e, n);
+                                                                Sms sms = new Sms();
+                                                                sms.enviarnotificacao(operacao, valorTransf, e, n);
 
                                                                 break;
 
@@ -176,6 +197,13 @@ public class ContaCorrente extends Conta {
                                                                         + valorTransf + " transferido com sucesso!");
 
                                                                 cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                                String e = cliente.getEmail();
+                                                                Long n = cliente.getTelefone();
+                                                                String operacao = "a traferência";
+                                                                Email email = new Email();
+                                                                email.enviarnotificacao(operacao, valorTransf, e,n);
+                                                                Sms sms = new Sms();
+                                                                sms.enviarnotificacao(operacao, valorTransf, e,n);
 
                                                                 break;
                                                             } else {
@@ -199,6 +227,13 @@ public class ContaCorrente extends Conta {
                                                                         + (valorTransf) + " transferido com sucesso!");
 
                                                                 cont.setSaldo(cont.getSaldo() + (valorTransf));
+                                                                String e = cliente.getEmail();
+                                                                Long n = cliente.getTelefone();
+                                                                String operacao = "a traferência";
+                                                                Email email = new Email();
+                                                                email.enviarnotificacao(operacao, valorTransf, e,n);
+                                                                Sms sms = new Sms();
+                                                                sms.enviarnotificacao(operacao, valorTransf, e, n);
 
                                                                 break;
 
@@ -216,6 +251,13 @@ public class ContaCorrente extends Conta {
                                                                         + valorTransf + " transferido com sucesso!");
 
                                                                 cont.setSaldo(cont.getSaldo() + valorTransf);
+                                                                String e = cliente.getEmail();
+                                                                Long n = cliente.getTelefone();
+                                                                String operacao = "a traferência";
+                                                                Email email = new Email();
+                                                                email.enviarnotificacao(operacao, valorTransf, e,n);
+                                                                Sms sms = new Sms();
+                                                                sms.enviarnotificacao(operacao, valorTransf, e,n);
 
                                                                 break;
                                                             } else {
@@ -272,6 +314,13 @@ public class ContaCorrente extends Conta {
                                     conta.setCheque(conta.getCheque() + analise);
                                     JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
                                             + " sacado com sucesso! Usamos o cheque especial!");
+                                    String e = cliente.getEmail();
+                                    Long n = cliente.getTelefone();
+                                    String operacao = "o saque";
+                                    Email email = new Email();
+                                    email.enviarnotificacao(operacao, valorSaque, e,n);
+                                    Sms sms = new Sms();
+                                    sms.enviarnotificacao(operacao, valorSaque,e,n);
                                 } else {
                                     JOptionPane.showMessageDialog(null,
                                             "O valor ultrapassa o saldo da sua conta com o cheque!");
@@ -282,6 +331,13 @@ public class ContaCorrente extends Conta {
                                     conta.setCheque(conta.getCheque() + analise);
                                     JOptionPane.showMessageDialog(null, "Valor de " + valorSaque
                                             + " sacado com sucesso! Usamos o cheque especial!");
+                                    String e = cliente.getEmail();
+                                    Long n = cliente.getTelefone();
+                                    String operacao = "o saque";
+                                    Email email = new Email();
+                                    email.enviarnotificacao(operacao, valorSaque,e,n);
+                                    Sms sms = new Sms();
+                                    sms.enviarnotificacao(operacao, valorSaque,e,n);
                                 } else {
                                     JOptionPane.showMessageDialog(null, "O valor ultrapassa o saldo do cheque!");
                                 }
