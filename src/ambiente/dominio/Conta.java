@@ -40,7 +40,6 @@ public abstract class Conta {
     public String getType() {
         return this.Type;
     }
-    
 
     public abstract void trasferir(String CPF, int numConta, List<Cliente> clientes);
 

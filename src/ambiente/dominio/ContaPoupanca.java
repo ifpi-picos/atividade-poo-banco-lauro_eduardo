@@ -81,7 +81,7 @@ public class ContaPoupanca extends Conta {
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "O valor que você quer transferir é maior que seu saldo!");
+                                    "Saldo insuficiente!");
                             // Se o valor da transferência for menor
                         }
                     }
