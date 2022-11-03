@@ -24,7 +24,6 @@ public class Cliente {
         this.endereco = endereco;
         this.dataNascimento = dataNascimento;
         this.senha = senha;
-        // this.contas.add(conta);
     }
 
     public String getNome() {

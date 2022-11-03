@@ -1,23 +1,17 @@
 import ambiente.dominio.Conta;
 import ambiente.dominio.Endereco;
-import ambiente.dominio.Notificacao;
 import ambiente.dominio.Cliente;
 import ambiente.dominio.ContaCorrente;
 import ambiente.dominio.ContaPoupanca;
-import ambiente.dominio.Email;
-import javax.activation.*;
-import javax.management.Notification;
 
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-// import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
-// import javax.swing.UIManager;
 
 public class App {
 
@@ -77,7 +71,7 @@ public class App {
         int opcSelecionada = JOptionPane.showOptionDialog(null,
                             "1. Corrente \n2. Poupança", "Tipo de Conta", JOptionPane.OK_CANCEL_OPTION,
                             JOptionPane.PLAIN_MESSAGE, null, menuEntrar, null);
-
+        
         String senha_p = JOptionPane.showInputDialog("Crie uma senha: ");
         String email_p = JOptionPane.showInputDialog("Digite seu email: ");
         String telefone_p = JOptionPane.showInputDialog("Digite seu telefone: ");
@@ -92,13 +86,12 @@ public class App {
         String bairro_p = JOptionPane.showInputDialog("Qual o seu bairro?");
         String cidade_p = JOptionPane.showInputDialog("Qual a cidade que você mora?");
         String Cep_p = JOptionPane.showInputDialog("Digite seu CEP: ");
-        String id_gerado = id_endereco();
 
         long convertor_num = Long.parseLong(numero_p);
         long convertor_cep = Long.parseLong(Cep_p);
         long telefone_conv = Long.parseLong(telefone_p);
 
-        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep, id_gerado);
+        Endereco endereco = new Endereco(logradouro_p, convertor_num, bairro_p, cidade_p, convertor_cep);
 
         String tipo = "";
 
@@ -118,10 +111,6 @@ public class App {
             cliente.addConta(c1);
             clientes.add(cliente);
         }
-
-        //Conta c1 = new Conta(numConta, tipo);
-        //Cliente cliente = new Cliente(Nome_p, CPF_p, email_p, telefone_conv, endereco, dataFormat, c1, senha_p);
-        //clientes.add(cliente);
 
         JOptionPane.showMessageDialog(null, "Número da conta: " + numConta);
        
@@ -329,36 +318,17 @@ public class App {
                             JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType() + "\nNúmero de Transferências: ");
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() + "\nTipo de conta: "+ conta.getType());
                         }else{
                             JOptionPane.showMessageDialog(null, "Nome: " + cliente.getNome() + "\nEmail: " + cliente.getEmail() + "\nTelefone: " + cliente.getTelefone() + "\nRua: "
                                 + cliente.getEndereco().getLogra() + ", Número: " + cliente.getEndereco().getNume()
                                 + "\nBairro: " + cliente.getEndereco().getBairro() + "\nCidade: "
-                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() +"\n ID do endereço: "+cliente.getEndereco().getid() + "\nTipo de conta: "+ conta.getType());
+                                + cliente.getEndereco().getCidade() + "\nCEP: " + cliente.getEndereco().getCEP() + "\nData de Nascimento: " + cliente.getDataNascimento() + "\nTipo de conta: "+ conta.getType());
                         }
                     }
                 }
             }
         }
     }
-
-    public static String id_endereco(){
-
-    Random geradorConta = new Random();
-
-    int num1 = geradorConta.nextInt(9);
-    int num2 = geradorConta.nextInt(9);
-    int num3 = geradorConta.nextInt(9);
-    int num4 = geradorConta.nextInt(9);
-    int num5 = geradorConta.nextInt(9);
-    int num6 = geradorConta.nextInt(9);
-    int num7 = geradorConta.nextInt(9);
-    int num8 = geradorConta.nextInt(9);
-    int num9 = geradorConta.nextInt(9);
-
-    String str = "" + num1 + num2 + num3 + num4 + num5+ num6 + num7 + num8 + num9;
-
-    return str;    
-}
 
     }

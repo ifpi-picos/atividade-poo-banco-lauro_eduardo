@@ -6,15 +6,13 @@ public class Endereco {
     private String bairro;
     private String cidade;
     private long CEP;
-    private String id_endereco;
 
-    public Endereco(String logra, long nume, String bairro, String cida,long cep,String id){
+    public Endereco(String logra, long nume, String bairro, String cida,long cep){
         this.Logradouro = logra;
         this.numero = nume;
         this.cidade = cida;
         this.bairro = bairro;
         this.CEP = cep;
-        this.id_endereco = id;
     }
 
     public String getLogra(){
@@ -35,8 +33,5 @@ public class Endereco {
 
     public long getCEP(){
         return CEP;
-    }
-    public String getid(){
-        return id_endereco;
     }
 }
