@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 public class App {
 
     static List<Cliente> clientes = new ArrayList<>();
+    static List<Integer> num_conta = new ArrayList<>();
+
 
     public static void main(String[] agrgs) throws ParseException {
 
@@ -49,9 +51,19 @@ public class App {
     }
 
     public static void cadastrar() throws ParseException {
-        Random geradorConta = new Random();
 
-        int numConta = geradorConta.nextInt(51);
+        int numConta;
+        
+        while (true){
+            Random geradorConta = new Random();
+            numConta = geradorConta.nextInt(2000);
+            if(!num_conta.contains(numConta) && numConta!=0){
+                num_conta.add(numConta);
+                break;
+            }
+            
+        }
+
         /* Informações da pessoa */
         String Nome_p = JOptionPane.showInputDialog("Seu nome: ");
         String CPF_p = JOptionPane.showInputDialog("Seu CPF: ");
@@ -201,9 +213,17 @@ public class App {
                                     JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null,
                                     menusArray, null);
                         
-                        Random geradorConta = new Random();
+                        int numConta;
 
-                        int numConta = geradorConta.nextInt(51);
+                        while (true){
+                            Random geradorConta = new Random();
+                            numConta = geradorConta.nextInt(2000);
+                            if(!num_conta.contains(numConta) && numConta!=0){
+                                num_conta.add(numConta);
+                                break;
+                            }
+                            
+                        }
 
                         if(opcaoSelecionad == 0){
                             String tipo = "Poupança";
